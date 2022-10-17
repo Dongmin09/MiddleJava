@@ -1,0 +1,36 @@
+package homework;
+
+public enum Planet {
+	MERCURY(2439), VENUS(6052),EARTH(6371),
+	MARS(3390), JUPITER(69911), SATURN(58232),
+	URANUS(25362), NEPTUNE(24622);
+	
+	private int radius;
+	
+	private Planet(int radius) {
+		this.radius = radius;
+	}
+
+	public int getRadius() {
+		return radius;
+	}
+
+	public void setRadius(int radius) {
+		this.radius = radius;
+	}
+	
+}
+
+package homework;
+
+public class PlanetTest {
+	public static void main(String[] args) {	
+		for(Planet pl : Planet.values()) {
+			System.out.println(pl + "의 면적 : " + (double)4*Math.PI*pl.getRadius()*pl.getRadius() + "㎢");
+		}
+//		Planet [] pi = Planet.values();
+//		for (int i = 0; i < pi.length; i++) {
+//			System.out.printf("%s의 면적 : %.2f km^2\n", pi[i].name(),4*Math.PI*pi[i].getRadius()*pi[i].getRadius());
+//		}
+	}
+}

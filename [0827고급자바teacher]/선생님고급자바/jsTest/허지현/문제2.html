@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 랜덤 숫자 20개 담는 배열 
+        // for문 이용해서 배열안의 최소값을 변수minValue에 담아준다
+        var v_arr = [20];
+        for (i = 0; i < 20; i++) { //20개 담는 배열
+            v_arr[i] = (Math.floor(Math.random() * (40 - 1) + 1));
+        }
+        alert(v_arr);
+
+        // for (j = 19; j > 0; j--) {
+        //     if ((v_arr[0] > v_arr[j])) {
+        //         v_arr.splice(j, 1);
+        //     }
+        // }
+        function findMinArr(v_arr) {
+            if (v_arr.length == 0) {
+                return 0;
+            } else {
+                var min = v_arr[0];
+                for (var i = 1; i < v_arr.length; i++) {
+                    if (min > v_arr[i]) {
+                        min = v_arr[i];
+                    }
+                }
+                return min;
+            }
+        }
+        var minValue = findMinArr(v_arr);
+        alert(minValue);
+
+    </script>
+</body>
+
+</html>

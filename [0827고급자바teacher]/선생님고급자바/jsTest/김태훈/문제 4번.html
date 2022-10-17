@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+     * {
+        margin:0;
+        padding:0;
+     }
+    #id_bar {
+        width: 92%;
+        left : 10px;
+        top : 60px;
+        height: 300px;
+        border: 30px groove rgb(226, 43, 156);
+        background-color: white;
+    }
+
+    #id_disp {   
+    color: yellow;
+    font-size: 250%;
+    font-weight: bolder;
+    text-align:center;  
+   }
+   
+   #id_title {   
+    color: yellow;
+    font-size: 350%;
+    font-weight: bolder;
+    text-align:center;  
+   }
+
+</style>
+</head>
+<body>
+    <div id="id_bar" background-color="white">
+        <div id="id_title" style ="display: none">
+        공지사항<br><br> 
+        <hr> 
+        </div>
+        <div id="id_disp" style ="display: none">
+        최고의 프로그래머라면<br><br>
+        에러메세지에 웃음이 난다<br><br>
+        시행착오가 즐겁다<br><br>
+        로그 출력은 습관이다<br><br>
+        컴터 NULL 사랑해<br><br>
+        </div>
+    </div>
+<script>
+var v_bar = document.querySelector("#id_bar");
+var v_disp = document.querySelector("#id_disp");
+var v_title = document.querySelector("#id_title");
+v_mvHeight = 10;
+
+f_move();
+function f_move() {
+    v_bar.style.bottom = 
+    parseInt(v_bar.style.top) + parseInt(v_bar.style.height) + 80 + "px";
+    if(!v_bar.style.left) {   
+        v_bar.style.left="10px";
+        v_bar.style.top="10px";
+        v_bar.style.height="300px"
+    }
+    console.log(v_bar.style.bottom);
+    console.log(v_bar.style.height);
+    console.log(window.innerHeight);
+    v_bar.style.height = parseInt(v_bar.style.height) + v_mvHeight + "px";  
+    var v_barBottom = parseInt(v_bar.style.bottom);
+    var v_barHeight = parseInt(v_bar.style.height);
+    if (v_barBottom >= window.innerHeight) {
+        v_mvHeight = 0;
+       var timerVar = setTimeout(f_move, 100);
+       clearTimeout(timerVar);
+       v_disp.style.display = "block";
+       v_title.style.display = "block";
+       v_bar.style.backgroundColor = "black";
+    }
+    setTimeout(f_move, 100);
+}
+</script>
+</body>
+</html>

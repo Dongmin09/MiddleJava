@@ -1,0 +1,144 @@
+package kr.or.ddit.basic;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+
+class Student implements Comparable<Student>{
+
+	private String stNum; // 학번
+	private String name; //이름
+	private int korea; //국어점수
+	private int eng; //영어점수
+	private int math; //수학점수
+	private int total; //총점
+	private int rank; //등수
+
+	public Student(String stNum, String name, int korea, int eng, int math) {
+		super();
+		this.stNum = stNum;
+		this.name = name;
+		this.korea = korea;
+		this.eng = eng;
+		this.math = math;
+		total = korea + eng + math;
+
+	}
+
+	public String getStNum() {
+		return stNum;
+	}
+
+	public void setStNum(String stNum) {
+		this.stNum = stNum;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getKorea() {
+		return korea;
+	}
+
+	public void setKorea(int korea) {
+		this.korea = korea;
+	}
+
+	public int getEng() {
+		return eng;
+	}
+
+	public void setEng(int eng) {
+		this.eng = eng;
+	}
+
+	public int getMath() {
+		return math;
+	}
+
+	public void setMath(int math) {
+		this.math = math;
+	}
+
+	public int getTotal() {
+		return total;
+	}
+
+	public void setTotal(int total) {
+		this.total = total;
+	}
+
+	public int getRank() {
+		return rank;
+	}
+
+	public void setRank(int rank) {
+		this.rank = rank;
+	}
+
+	@Override
+	public String toString() {
+		return "Student [학번=" + stNum + ", 이름=" + name + ", 국어=" + korea + ", 영어=" + eng + ", 수학=" + math
+				+ ", 총점=" + total + ", 등수=" + rank + "]";
+	}
+
+	@Override
+	public int compareTo(Student num1) {
+
+		return this.getStNum().compareTo(num1.getStNum());
+		//return Integer.compare(this.getStNum(), num1.getStNum());
+		//return ((Integer)this.getStNum()).compareTo(num1.getStNum());
+	}
+}
+class SortTotalDesc implements Comparator<Student>{
+
+	@Override
+	public int compare(Student total1, Student total2) {
+		int result = Integer.compare(total1.getTotal(), total2.getTotal())*-1;
+		if(result == 0)
+			result = total1.getStNum().compareTo(total2.getStNum())*-1;
+		return result;
+		//		return  new Integer(total1.getTotal()).compareTo(total2.getTotal())*-1;
+	}
+}
+public class StudentRank {
+	public static void main(String[] args) {
+		List<Student> stRank	= new ArrayList<Student>();
+		stRank.add(new Student("01", "홍길동", 90,95,95));
+		stRank.add(new Student("03", "변학도", 95,80,80));
+		stRank.add(new Student("04", "성춘향", 95,85,85));
+		stRank.add(new Student("06", "이순신", 90,90,80));
+		stRank.add(new Student("02", "강감찬", 85,90,85));
+		stRank.add(new Student("05", "일지매", 90,80,100));
+		System.out.println("정렬 전 : " );
+		for (Student stNum : stRank) {
+			System.out.println(stNum);
+		}
+		System.out.println("-----------------------------------------------------------------------------------");
+		Collections.sort(stRank);
+		System.out.println("학번의 오름차순으로 정렬 후 : " );
+
+		for (Student stNum : stRank) {
+			System.out.println(stNum);
+		}
+		System.out.println("-----------------------------------------------------------------------------------");
+
+		Collections.sort(stRank, new SortTotalDesc());
+		System.out.println("총점의 내림차순(총점이 같을시 학번의 내림차순)으로 정렬 후 : ");
+		for (Student total : stRank) {
+			System.out.println(total);
+
+
+
+		}
+	}
+}
+
+

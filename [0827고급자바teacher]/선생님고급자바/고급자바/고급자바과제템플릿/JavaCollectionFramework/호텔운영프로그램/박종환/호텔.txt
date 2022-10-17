@@ -1,0 +1,191 @@
+start
+roommap = new HashMap<>();
+		scan = new Scanner(System.in);
+		ObjectOutputStream oos = null;
+		
+		Object obj = null;
+		ObjectInputStream ois =  new ObjectInputStream(
+                new BufferedInputStream(
+         new FileInputStream("d:/D_Other/Hoteldata.bin")));
+
+	
+	
+	while((obj=ois.readObject())!= null) {
+		System.out.println(obj);
+		
+		roommap = (Map<String, customer>) obj;
+	
+case 4:
+try {
+					oos = new ObjectOutputStream(
+				               new BufferedOutputStream(
+				                     new FileOutputStream("d:/D_Other/Hoteldata.bin")));
+					oos.writeObject((roommap));	
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
+
+
+
+package project;
+
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Set;
+
+
+
+public class Hotel {
+		Map <String,customer> roommap ;
+		Scanner scan;
+	
+	public void start() {
+		roommap = new HashMap<>();
+		scan = new Scanner(System.in);
+		
+		while(true) {
+		System.out.println("========================");
+		System.out.println("1. 체크인 \t 2. 체크아웃 \t 3.객실정보\t4.프로그램종료");
+		System.out.println("메뉴를 선택하세요 : ");
+		int menu = scan.nextInt();
+				
+		switch(menu) {
+		case 1:
+			checkin();
+			break;
+		case 2:
+			checkout();
+			break;
+		case 3:
+			roomstatus();
+			break;
+		case 4:
+			System.out.println("프로그램을 종료합니다.");
+			
+			return;
+		default :
+			System.out.println("다시입력 해주세요");
+		}
+		
+	}
+	}
+	public static void main(String[] args) {
+		new Hotel().start();
+	}
+	
+	
+
+
+public void checkin() {
+	
+	System.out.println("어느방에 체크인 하시겠습니까?");
+	scan.nextLine();
+	String rnum = scan.nextLine();
+	
+	if(roommap.get(rnum) != null) {
+		System.out.println(rnum + "방에는 체크인한 사람이 있습니다.");
+		return;
+	}
+	else if(roommap.get(rnum) == null) {
+		System.out.println("누구를 체크인 하시겠습니까?");
+		String name = scan.nextLine();
+		roommap.put(rnum, new customer(rnum,name));
+		System.out.println(roommap);
+		System.out.println("체크인완료.");
+		return;
+	}
+
+}
+
+public void checkout() {
+	System.out.println("어느방을 체크아웃 하시겠습니까?");
+	scan.nextLine();
+	String rnum = scan.nextLine();
+	
+	if(roommap.get(rnum) == null) {
+		System.out.println(rnum + "호 방에는 체크인한 사람이 없습니다.");
+	}
+	else if(roommap.get(rnum) != null) {
+		System.out.println(rnum + "호 체크아웃이 완료되었습니다.");
+		roommap.remove(rnum);
+	}
+}
+
+public void roomstatus() {
+	
+	Set <String>keyset = roommap.keySet();
+	
+	Iterator<String> it = keyset.iterator();
+	
+	if(keyset.size() <= 0) {
+		System.out.println("투숙객이 없습니다.");
+		return;
+	}
+	else if(keyset.size() > 0) {
+	while(it.hasNext()) {
+		
+		String rnum = it.next();
+		customer p = roommap.get(rnum);
+		System.out.println( rnum + "," + p.getName() );
+	}
+	return;
+	}
+	
+	
+}
+	
+	
+	
+	
+
+
+
+
+}
+
+
+class customer{
+	private String rnum;
+	private String name;
+	
+	public customer(String rnum, String name) {
+		super();
+		this.rnum = rnum;
+		this.name = name;
+	}
+
+	public String getRnum() {
+		return rnum;
+	}
+
+	public void setRnum(String rnum) {
+		this.rnum = rnum;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return "투숙객정보 [방번호:" + rnum + ", 투숙객=" + name + "]";
+	}
+	
+	
+	
+	
+	
+}
+
+
+
+
+

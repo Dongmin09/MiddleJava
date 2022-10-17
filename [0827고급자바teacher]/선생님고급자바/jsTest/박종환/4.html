@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html id="id_html" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    #id_html {
+            background-color: black;
+            z-index: 10;
+        }
+    #id_curtain {
+        position: absolute;
+        width:800px;
+        border:20px groove pink;
+        background-color: white;
+        z-index:100;
+        left: 500px;
+    }
+    #id_sec{
+        position: relative;
+        color: rgb(117, 117, 6);
+        font-size: 40px;
+        border: 20px solid black;
+        text-align: center;
+        top: 10px;
+        background-color: black;
+        z-index: 50;
+        margin: 50px;
+        padding: 30px;
+        transform-origin: center;
+    }
+   
+      
+    #id_content {
+        
+        border: 5px solid black;
+  
+        
+    }
+
+    .in{
+        border: 5px solid black;
+        background-color: black;
+        
+    }
+</style>
+</head>
+<body>
+<div id="id_curtain">
+    <div id="id_sec" style="display: none;" >
+        공지사항<br><br><br><br>
+        <div class="in" id="id_content" style="display: none";>
+            <div class="in">최고의 프로그래머라면</div><br>
+            <div class="in">에러메시지에 웃음이 난다</div><br>
+            <div class="in">시행착오가 즐겁다</div><br>
+            <div class="in">로그출력은 습관이다</div><br>
+            <div class="in">컴터 NULL 사랑해</div><br>
+        </div>
+    </div>
+</div>
+        
+<script>
+    var v_curtain = document.querySelector("#id_curtain");
+    var v_ex = 80;
+    function f_show(){
+        //태그 내에 height속성이 정의가 안 되어 있다면 강제 초기값
+        //function 밖에 있으면 더 좋음(상황에 의존)
+        if(!v_curtain.style.height){
+            v_curtain.style.height = "5px"; 
+        }
+        v_curtain.style.height = parseInt(v_curtain.style.height) + v_ex + "px";
+        // 재귀호출로 인해 무한 루핑이니, 종료 조건 필요(여기선 특정 height값!)
+        if(parseInt(v_curtain.style.height) >= 900){
+            document.querySelector("#id_sec").style.display = "block";
+            document.querySelector("#id_content").style.display = "block";
+            v_curtain.style.background = "black";
+            return; //쫑룡
+        } 
+        setTimeout(f_show,150);
+    }
+    window.onload = f_show;
+</script>   
+</body>
+</html>

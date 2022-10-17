@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+//     var v_ranDatas = [];  // 빈 배열 생성
+
+//     for(var i=1; i<=20; i++){
+//         v_ranDatas.push(Math.ceil(Math.random()*45));
+
+//         v_ranDatas[v_ranDatas.length] = Math.ceil(Math.random()*45);
+
+//         8라인과 9라인은 정확히 동작이 같음
+// }
+     function f_ranNum(p_start,p_end){
+        return Math.floor(Math.random()*(p_end-p_start+1)) + p_start;
+      }
+      function f_lotto() {
+        var v_lottoNums = []; //번호 담을 배여 생성
+        for(var i=0;i<20; i++){
+            v_lottoNums[i] = f_ranNum(1,45); 
+        }
+        alert(v_lottoNums);
+        
+        var v_minValue = v_lottoNums[0]; // 첫번째 index의 값이 최소라고 가정
+        
+        for(var i=1; i < v_lottoNums.length; i++){
+            if(v_lottoNums[i] < v_minValue){
+                v_minValue = v_lottoNums[i];
+            }
+        }
+        alert("최소값: "+ v_minValue);
+    }
+    f_lotto();
+         
+</script>

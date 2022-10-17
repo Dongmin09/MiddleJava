@@ -1,0 +1,112 @@
+package kr.or.ddit.basic;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Scanner;
+import java.util.Set;
+
+
+public class HotelTest {
+	public static void main(String[] args) throws ClassNotFoundException {
+		Scanner sc = new Scanner(System.in);
+
+		boolean aa = true;
+		HotelMethod hm = new HotelMethod();
+
+		System.out.println("**************\n호텔 문을 열었습니다.\n**************");
+		while (aa) {
+			System.out.print("\n*********************************\r\n" + "어떤 업무를 하시겠습니까?\r\n"
+					+ "1.체크인  2.체크아웃 3.객실상태 4.업무종료      \r\n" + "*********************************\n" + "번호입력 => ");
+			int checkNum = sc.nextInt();
+			switch (checkNum) {
+			case 1:
+				hm.checkIn();
+				break;
+			case 2:
+				hm.checkOut();
+				break;
+			case 3:
+				hm.roomcheck();
+				break;
+			case 4:
+				hm.stop();
+				aa = false;
+
+			}
+		}
+		sc.close();
+		ObjectOutputStream oos = null;
+		try {
+			oos = new ObjectOutputStream(new FileOutputStream("d:/D_Other/hotel.txt"));
+			oos.writeObject(hm);
+			
+		} catch (IOException e) {
+		}finally{
+			try {
+				oos.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		ObjectInputStream ois = null;
+		try {
+			ois = new ObjectInputStream(new FileInputStream("d:/D_Other/hotel.txt"));
+			Object obj = null;
+			while((obj = ois.readObject())!=null) {
+				HotelMethod hm1 = (HotelMethod) obj;
+				System.out.println("방번호: "+ hm1.toString());
+			}
+		} catch (IOException e) {
+		}
+		
+	}//메인
+}
+
+class HotelMethod implements Serializable {
+	HashMap<String, String> map = new HashMap<>();
+	Scanner sc = new Scanner(System.in);
+
+	void checkIn() {
+		System.out.print("어느방에 체크인 하시겠습니까?\n방번호 입력 => ");
+		String checkIn = sc.nextLine();
+
+		System.out.print("\n누구를 체크인 하시겠습니까?\n이름 입력 => ");
+		String checkInNm = sc.nextLine();
+		if (map.get(checkIn) != null) {
+			System.out.println(checkIn + "방에는 이미 사람이 있습니다.");
+		} else {
+			map.put(checkIn, checkInNm);
+			System.out.println("체크인 되었습니다.");
+		}
+	}
+
+	void checkOut() {
+		System.out.print("어느방을 체크아웃 하시겠습니까?\n" + "방번호 입력 => ");
+		String checkOut = sc.nextLine();
+		if (map.get(checkOut) != null) {
+			map.remove(checkOut);
+			System.out.println(checkOut + "번방 체크아웃 되었습니다.");
+		} else {
+			System.out.println(checkOut + "방에는 사람이 없습니다.");
+		}
+	}
+
+	void roomcheck() {
+		Set<String> keySet = map.keySet();
+		Iterator<String> it = keySet.iterator();
+		while (it.hasNext()) {
+			String key = it.next();
+			System.out.println("방번호: " + key + "	투숙객: " + map.get(key));
+		}
+	}
+
+	void stop() {
+		System.out.println("***************\n" + "호텔 문을 닫았습니다.\n" + "***************");
+	}
+}

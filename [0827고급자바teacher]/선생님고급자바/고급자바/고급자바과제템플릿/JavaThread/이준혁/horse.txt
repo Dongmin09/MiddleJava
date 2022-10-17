@@ -1,0 +1,101 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class ThreadTest13 {
+
+	public static void main(String[] args) {
+		
+		List<Horse> list = new ArrayList<>();//정렬을 해줘야 해서 list로 넣어줌
+		list.add(new Horse("1번말"));
+		list.add(new Horse("2번말"));
+		list.add(new Horse("3번말"));
+		list.add(new Horse("4번말"));
+		list.add(new Horse("5번말"));
+		list.add(new Horse("6번말"));
+		list.add(new Horse("7번말"));
+		list.add(new Horse("8번말"));
+		list.add(new Horse("9번말"));
+		list.add(new Horse("10번말"));
+		
+		for (Horse hs : list) { //ths를 hs에 넣고 시작
+			hs.start();
+		}
+		
+		while(true){ //while 문으로 반복하여 메인쓰레드 제외하고 종료될때까지 반복
+			for(int i=0; i<list.size(); i++){//말의 10개만큼
+				System.out.print(list.get(i).name+" : ");
+				for(int j=1; j<=50; j++){
+					if(list.get(i).place == j){//i번째 위치가 j와 같으면 
+						System.out.print(">");//>로 변환
+						continue;  //하고 첫번째 for 문으로 올라가서
+					}
+					System.out.print("-"); //-를 출력
+				}
+				System.out.println();
+			}
+			try {
+				Thread.sleep(500);//0.5초의 시간 딜레이
+			} catch (InterruptedException e) {
+			}
+			
+			int exitCnt = 0;//스레드 갯수
+			for(int i=0; i<list.size(); i++){
+				if(list.get(i).getState() == Thread.State.TERMINATED) {//스레드의 상태가 종료되었을때
+					exitCnt++;//스레드의 갯수를 증가시킴
+				}
+			}
+			if(exitCnt==10) {//쓰레드가 다 종료되면 while 종료
+				break;
+			}
+			System.out.println("\n=========================================================\n");
+			//끝나지 않았으면 출력
+		}
+		
+		
+		System.out.println();
+		Collections.sort(list);//정렬한것
+		System.out.println("===경기결과===");
+		for(Horse h: list){//리스트를 h에 넣는 foreach문
+			System.out.println(h);// horse의 tostring 출력
+		}
+	}
+
+}
+
+class Horse extends Thread implements Comparable<Horse>{  //쓰레드를 상속받고 list를 정렬해줄 comparable을 구현
+	public String name;
+	public static int setRank = 1;// 여기서 setRank를 정해주면 rank에 저장 
+	public int rank;//말 각각의 등수 
+	public int place = 1; 
+
+	public Horse(String name) {
+		this.name = name;
+	}
+
+	@Override
+	public void run() {
+		for (int i = 0; i < 50; i++) {
+			try {
+				Thread.sleep((int) (Math.random() * 500));
+			} catch (InterruptedException e) {
+			
+			}
+			if(place<50) {
+				place++;
+			}
+		}
+		rank = setRank++;
+	}
+
+	@Override
+	public int compareTo(Horse h) {
+		return Integer.compare(rank, h.rank);
+	}
+
+	@Override
+	public String toString() {
+		return name + " : " + rank + "등 ";
+	}	
+	
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+
+// 시간을 매개변수로 받아서 올라간 걸리는 리턴하는 함수
+
+f_retDistance = function(p_sec) {
+    
+    if (p_sec % 2 == 0) {  // 짝수
+        return (p_sec / 2) + "cm를 올라갔습니다.";
+    } else if (p_sec % 2 == 1) {  // 홀수
+        return (p_sec - 1) / 2 + 3 + "cm를 올라갔습니다.";
+    }
+ }
+
+// 거리를 매개변수로 받아서, 그 만큼 올라가는데 걸리는 시간을 리턴하는 함수
+f_retSeconds = function(p_dist) {
+    // 최초값은 무조건 홀수 시간에 나온다. 
+    // 시간을 통해서 거리를 구했으니 반대로 계산해주면 됨.
+    // (p_sec - 1) / 2 + 3 = p_dist
+    // p_sec = (p_dist - 3) * 2 + 1
+    
+    if (p_dist < 3 && p_dist >= 0) {
+        return (p_dist * 2) + "초 시간이 걸립니다";; 
+    }
+        return (p_dist - 3) * 2 + 1 + "초 시간이 걸립니다";
+    
+}
+
+alert(f_retDistance(3));  // 3초 동안 올라간 거리
+alert(f_retSeconds(1));  // 10cm 올라가는데 걸리는 초
+</script>    

@@ -1,0 +1,31 @@
+public class PlanetArea {
+    public static void main(String[] args) {
+        Planet[] p = Planet.values();
+        System.out.println("행성의 반지름(KM):");
+        for (int i = 0; i < p.length; i++) {
+            System.out.println(p[i].name() + "(" + p[i].getRadius() + ") 면적 : " + p[i].getArea() + "㎢");
+        }
+    }
+}
+enum Planet {
+    MERCURY(2349),
+    VENUS(6052),
+    EARTH(6371),
+    MARS(3390),
+    JUPITER(69911),
+    SATURN(58232),
+    URANUS(25362),
+    NEPTUNE(24622);
+    
+    private int radius;
+
+    Planet(int radius) {
+        this.radius = radius;
+    }
+    public int getRadius() {
+        return radius;
+    }
+    public double getArea() {
+        return Math.PI * (radius * radius);
+    }
+}

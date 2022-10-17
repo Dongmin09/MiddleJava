@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #id_disp {
+            border: 15px groove pink;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="id_disp" style="height:80px"></div>
+    <script>
+        var timer;
+        var v_disp = document.querySelector("#id_disp");
+        str = "<h1>공지사항</h1><hr>";
+        str += "<h1>최고의 프로그래머라면</h1><br>"
+        str += "<h1>에러메시지에 웃음이 난다.</h1><br>"
+        str += "<h1>시행착오가 즐겁다</h1><br>"
+        str += "<h1>로그 출력은 습관이다.</h1><br>"
+        str += "<h1>컴터 Null 사랑행</h1><br>"
+
+        function f_changeDiv() {
+            v_disp.style.height = parseInt(v_disp.style.height) + 10 + "px";
+            if (parseInt(v_disp.style.height) >= 600) {
+                clearTimeout(timer);
+                v_disp.innerHTML = str;
+                v_disp.style.background = "black";
+                v_disp.style.color = "yellow";
+            } else {
+                timer = setTimeout(f_changeDiv, 100);
+            }
+            console.log(parseInt(v_disp.style.height));
+        }
+        f_changeDiv();
+
+    </script>
+
+
+</body>
+
+</html>

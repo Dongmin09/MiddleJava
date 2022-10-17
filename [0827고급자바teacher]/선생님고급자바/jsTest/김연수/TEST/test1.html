@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>test1</title>
+</head>
+
+<body>
+    <script>
+        function f_retDistance(p_sec) {
+            var seconds = 0;
+            var add = 3;
+            var minus = 2;
+            for (var i = 1; i <= p_sec; i++) {
+                if (i % 2 == 1) {
+                    seconds += add;
+                } else if (i % 2 == 0) {
+                    seconds -= minus;
+                }
+            }
+            return seconds;
+        }
+        // 거리를 매개변수로 받아서, 그 만큼 올라가는 데 걸리는 시간을
+        // 리턴하는 함수
+        function f_retSeconds(p_dist) {
+            var a = 0;
+            while (true) {
+                a++;
+                if (p_dist == f_retDistance(a)) {
+                    return a + "초 걸렸습니다";
+                }
+            }
+        }
+        console.log(f_retDistance(3) + "cm 올라갔습니다."); // ?초동안 올라간 거리
+        console.log(f_retSeconds(10)); // 10cm 올라 가는데 걸리는 초
+
+    </script>
+</body>
+
+</html>

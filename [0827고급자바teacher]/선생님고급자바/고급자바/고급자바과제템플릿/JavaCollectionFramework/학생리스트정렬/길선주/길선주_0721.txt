@@ -1,0 +1,129 @@
+package kr.or.ddit.basic;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+public class Student implements Comparable<Student> {
+
+	private String num; // 학번
+	private String name; // 이름
+	private int koreanscore; // 국어점수
+	private int englishscore; // 영어점수
+	private int mathscore; // 수학점수
+	private int total;
+	private int rank;
+
+	public static void main(String[] args) {
+		List<Student> List = new ArrayList<Student>();
+
+		List.add(new Student("101", "홍길동", 70, 30, 50));
+		List.add(new Student("102", "길삼이", 44, 77, 90));
+		List.add(new Student("103", "홍식이", 46, 99, 80));
+		List.add(new Student("104", "개똥이", 50, 78, 90));
+		List.add(new Student("105", "춘삼이", 70, 88, 60));
+
+		Collections.sort(List);// 정렬하기
+		System.out.println("학번 오름차순으로 정렬 후 : ");
+		for (Student student : List) {
+			System.out.println(student);
+		}
+		System.out.println("---------------------------");
+		// 총점의 역순으로 정렬하기
+		Collections.sort(List, new TotalDesc());
+
+		System.out.println("총점의 역순으로 정렬 후....");
+		for (Student student : List) {
+			System.out.println(student);
+		}
+		
+	}
+	public Student(String num, String name, int koreanscore, int englishscore, int mathscore) {
+		this.num = num;
+		this.name = name;
+		this.koreanscore = koreanscore;
+		this.englishscore = englishscore;
+		this.mathscore = mathscore;
+		this.total = koreanscore + englishscore + mathscore;
+	}
+
+	@Override
+	public String toString() {
+		return "Student [num=" + num + ", name=" + name + ", koreanscore=" + koreanscore + ", englishscore="
+				+ englishscore + ", mathscore=" + mathscore + ", total=" + total + ", rank=" + rank + "]";
+	}
+
+	public String getNum() {
+		return num;
+	}
+
+	public void setNum(String num) {
+		this.num = num;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getKoreanscore() {
+		return koreanscore;
+	}
+
+	public void setKoreanscore(int koreanscore) {
+		this.koreanscore = koreanscore;
+	}
+
+	public int getEnglishscore() {
+		return englishscore;
+	}
+
+	public void setEnglishscore(int englishscore) {
+		this.englishscore = englishscore;
+	}
+
+	public int getMathscore() {
+		return mathscore;
+	}
+
+	public void setMathscore(int mathscore) {
+		this.mathscore = mathscore;
+	}
+
+	public int getTotal() {
+		return total;
+	}
+
+	public void setTotal(int total) {
+		this.total = total;
+	}
+
+	public int getRank() {
+		return rank;
+	}
+
+	public void setRank(int rank) {
+		this.rank = rank;
+	}
+
+	@Override
+	public int compareTo(Student Student) {
+		return this.getNum().compareTo((Student.getNum()));
+	}
+}
+
+class TotalDesc implements Comparator<Student> {
+
+	@Override
+	public int compare(Student std1, Student std2) {
+		if (std1.getTotal() == std2.getTotal()) {
+			return -1;
+		} else {
+			return Integer.compare(std1.getTotal(), std2.getTotal()) * -1;
+		}
+	}
+}

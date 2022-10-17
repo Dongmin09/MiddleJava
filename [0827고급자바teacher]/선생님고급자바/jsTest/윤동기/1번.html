@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var v_time = 0;
+        var v_dis = 0;
+
+        // 시간을 매개변수로 받아서 올라간 거리를 리턴하는 함수
+        function f_retDistance(p_sec) {
+            for(var i = 0; i < p_sec; i++){
+                if(i%2 == 0){
+                    v_dis -= 2;
+                } else{
+                    v_dis += 3;
+                }
+            }
+            return p_dis + "cm를 올라갔습니다.";
+        }
+        
+        // 거리를 매개변수로 받아서, 그 만큼 올라가는 데 걸리는 시간을 리턴하는 함수
+        function f_retSeconds(p_dist) {
+
+            var p_sec=1;
+            for(;;){
+                if(p_dist == f_retDistance(p_sec)){
+                    return p_sec;
+                }
+                p_sec++;
+            }
+            
+            return p_sec + "초 시간이 걸립니다.";
+        }
+
+
+        alert(f_retDistance(3)); // 3초 동안 올라간 거리
+        alert(f_retSeconds(10)); // 10cm 올라 가는데 걸리는 초
+
+
+
+        // function f_sum(p_num) {
+        //     var sum = 0;
+        //     for (var i = 1; i < p_num; i++) {
+        //         sum += i; // +3, -2를 해야 하는 경우로 나누어야 함
+        //     }
+        // }
+        // f_sum(10);
+
+        // var a = 3;
+        // for (var i = 0; i < 5; i++) {
+        //     function f_result(i) {
+        //         f_retSeconds(a+i);
+        //         alert(f_retSeconds(a+i));
+        //         return f_retDistance(f_retSeconds(a+i));
+        //     }
+        // }
+        
+        // alert(f_result(8));
+    </script>
+</body>
+
+</html>
+
+<!-- 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15-->
+<!-- 3 1 4 2 5 3 6 4 7  5  8  6  9  7 10-->

@@ -1,0 +1,27 @@
+package work;
+
+public class EnumPlanet {
+	public enum Planet{
+		荐己(2439), 陛己(6052),
+		瘤备(6371), 拳己(3390),
+		格己(69911), 配己(58232),
+		玫空己(25362), 秦空己(24622);
+		
+		private double str;
+
+		Planet(double str) {
+			this.str = str;
+		}
+
+		public double getStr() {
+			return str;
+		}
+	}
+
+	public static void main(String[] args) {
+		Planet[] area = Planet.values();
+		for (int i = 0; i < area.length; i++) {
+			System.out.println(area[i].name() + ": " + (4 * Math.PI * area[i].getStr() * area[i].getStr() + "Т"));
+		}
+	}
+}

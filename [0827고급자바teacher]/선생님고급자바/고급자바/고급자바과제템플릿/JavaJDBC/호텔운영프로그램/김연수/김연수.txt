@@ -1,0 +1,319 @@
+package kr.or.ddit.basic.exam;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Scanner;
+
+import kr.or.ddit.util.JDBCUtil;
+
+/*
+	회원정보를 관리하는 프로그램을 작성하는데 
+	아래의 메뉴를 모두 구현하시오. (CRUD기능 구현하기)
+	(DB의 hotel테이블을 이용하여 작업한다.)
+	
+	* 자료 삭제는 객실 번호를 입력 받아서 삭제한다.
+	
+	예시메뉴)
+	----------------------
+		== 작업 선택 ==
+		1. 자료 입력			---> insert
+		2. 자료 삭제			---> delete
+		3. 자료 수정			---> update
+		4. 전체 자료 출력	---> select
+		5. 작업 끝.
+	----------------------
+	 
+	   
+// 회원관리 프로그램 테이블 생성 스크립트 
+create table hotel(
+room_No varchar2(30) not null,
+cus_Nm varchar2(30) not null,
+reg_dt DATE default sysdate,
+constraint hotel_pk primary key (room_No)
+);
+
+*/
+public class HotelInfoTest {
+	
+	private Connection conn;
+	private Statement stmt;
+	private PreparedStatement pstmt;
+	private ResultSet rs;
+	
+	private Scanner scan = new Scanner(System.in); 
+	
+	/**
+	 * 메뉴를 출력하는 메서드
+	 */
+	public void displayMenu(){
+		System.out.println();
+		System.out.println("----------------------");
+		System.out.println("  === 작 업 선 택 ===");
+		System.out.println("  1. .체크인");
+		System.out.println("  2. 체크아웃");
+		System.out.println("  3. 고객 정보 수정");
+		System.out.println("  4. 객실 상태");
+		System.out.println("  5. 업무종료.");
+		System.out.println("----------------------");
+		System.out.print("원하는 작업 선택 >> ");
+	}
+	
+	/**
+	 * 프로그램 시작메서드
+	 */
+	public void start(){
+		int choice;
+		do{
+			displayMenu(); //메뉴 출력
+			choice = scan.nextInt(); // 메뉴번호 입력받기
+			switch(choice){
+				case 1 :  // 체크인
+					insertMember();
+					break;
+				case 2 :  // 체크아웃
+					deleteMember();
+					break;
+				case 3 :  // 예약한 객실명 및 예약자 수정 
+					updateMember();
+					break;
+				case 4 :  // 객실 상태
+					displayMemberAll();
+					break;
+				case 5 :  // 업무 종료
+					System.out.println("작업을 마칩니다.");
+					break;
+				default :
+					System.out.println("번호를 잘못 입력했습니다. 다시입력하세요");
+			}
+		}while(choice!=5);
+	}
+	/*
+	 	 전체 회원 정보를 출력하는 메서드
+	 */
+	private void displayMemberAll() {
+		System.out.println();
+		System.out.println("--------------------------------------------------------------------------");
+		System.out.println(" 방번호\t\t\t투숙객\t\t\t체크인 된 시간");
+		System.out.println("--------------------------------------------------------------------------");
+		
+		try {
+			conn = JDBCUtil.getConnection();
+			
+			String sql = "select * from hotel";
+			
+			stmt = conn.createStatement();
+			
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				String roomNo = rs.getString("room_no");
+				String cusNm = rs.getString("cus_nm");
+				String chkIn = rs.getString("reg_dt");
+				
+				System.out.println(roomNo + "\t\t\t\t" + cusNm + "\t\t\t" + chkIn  );
+			}
+			System.out.println("--------------------------------------------------------------------------");
+			System.out.println("출력 작업 끝.");
+			
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn, stmt, pstmt, rs);
+		}
+	}
+
+	/*
+	 	객실 정보를 삭제하는 메서드
+	 */
+	private void deleteMember() {
+			System.out.println();
+			System.out.println("체크아웃 할 방번호를 입력하세요.");
+			System.out.print("방번호 >> ");
+			
+			String roomNo = scan.next();
+			
+		
+		try {
+			conn = JDBCUtil.getConnection();
+			
+			String sql = "delete from hotel where room_no = ? ";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,  roomNo);
+			int cnt = pstmt.executeUpdate();
+			
+			if(cnt > 0 ) {
+				System.out.println(roomNo + " 체크아웃 완료.");
+			} else {
+				System.out.println(roomNo + " 체크아웃 실패.");
+			}
+			
+			
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn, stmt, pstmt, rs);
+		}
+		}
+	/*
+	 	방번호 및 투숙객 성함을 수정하는 메서드
+	*/
+	 	private void updateMember() {
+		// 중복체크
+		boolean chk = false;
+		// 방번호 저장
+		String roomNo = "";
+		
+		do {
+			System.out.println();
+			System.out.println("수정을 원하는 방번호를 입력하세요.");
+			System.out.print("방번호 >> ");
+			
+			roomNo = scan.next();
+			
+			chk = checkMember(roomNo);
+			
+			if(chk == false) {
+				System.out.println("방번호 " + roomNo + " 는 이용중이 아닙니다.");
+				System.out.println("다시 입력해 주세요.");
+			}
+			
+		} while (chk == false);
+		
+		System.out.print("투숙객 성함 >> ");
+		String cusNm = scan.next();
+
+		try {
+			conn = JDBCUtil.getConnection();
+			
+			String sql = "update hotel  "
+					+ " set room_No = ? "
+					+ " set cus_Nm = ? "
+					+ " where room_No = ? ";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, roomNo);
+			pstmt.setString(2, cusNm);
+			pstmt.setString(3, roomNo);
+			
+			int cnt = pstmt.executeUpdate();
+			
+			if(cnt > 0 ) {
+				System.out.println(roomNo + " 객실 상태 수정 완료.");
+			} else {
+				System.out.println(roomNo + " 객실 상태 수정 실패.");
+			}
+			
+			
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn, stmt, pstmt, rs);
+		}
+		}
+	 
+	/*
+	 	체크인 메서드
+	 */
+	private void insertMember() {
+		// 중복체크
+		boolean chk = false;
+		//  방번호 값 저장
+		String roomNo = "";
+		
+		do {
+			System.out.println();
+			System.out.println("방번호를 입력하세요.");
+			System.out.print("방번호 >> ");
+			
+			roomNo = scan.next();
+			
+			chk = checkMember(roomNo);
+			
+			if(chk == true) {
+				System.out.println( roomNo + " 방에는 이미 사람이 있습니다.");
+				System.out.println("다시 입력해 주세요.");
+			}
+			
+		} while (chk == true);
+		
+		
+		System.out.print("투숙객 성함 >> ");
+		String cusNm = scan.next();
+
+		
+		try {
+			conn = JDBCUtil.getConnection();
+			String sql = "INSERT INTO hotel (room_No, cus_Nm, reg_dt)"
+				+" VALUES (?, ?,  sysdate)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, roomNo);
+			pstmt.setString(2, cusNm);
+			
+			int cnt = pstmt.executeUpdate();
+			
+			if(cnt > 0) {
+				System.out.println(roomNo + " 체크인 완료");
+			} else {
+				System.out.println(roomNo + " 체크인 실패");
+			}
+			
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			// 자원반납 ....
+			JDBCUtil.close(conn, stmt, pstmt, rs);
+		}
+	}
+	/*
+	 	방번호를 조회하여 이용중인지 알려주는 메서드
+	 	@param roomNo
+	 	@return 객실이 이용중이면 true, 없으면 false
+	 */
+	private boolean checkMember(String roomNo) {
+		boolean chk = false;
+		
+		try {
+			conn = JDBCUtil.getConnection();
+			
+			String sql = " select count(*) as cnt from hotel " + 
+					" where room_No = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, roomNo); 
+			
+			rs = pstmt.executeQuery();
+			
+			int cnt = 0;
+			
+			if(rs.next()) {
+				cnt = rs.getInt("cnt");
+			}
+			
+			if(cnt > 0 ) {
+				chk = true;
+			}
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			JDBCUtil.close(conn, stmt, pstmt, rs);
+		}
+		
+		return chk;
+	}
+
+	public static void main(String[] args) {
+		HotelInfoTest hotelObj = new HotelInfoTest();
+		hotelObj.start();
+	}
+
+}
+
+
+
+
+
+

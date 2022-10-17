@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    #id_curtain {
+        width:400px;
+        border:10px groove pink;
+    }
+    .content{
+        text-align: center; color: yellow;
+        width:400px;
+        height: 98%;
+        /* position: absolute; */
+        /* font-size: 2em; */
+        background-color: black;
+    }
+</style>
+</head>
+<body>
+    <div id="id_curtain">
+        <div  class="content">
+            <h1>공지사항</h1><br>
+            <hr color="white" >
+            <h2>최고의 프로그래머라면</h2><br>
+            <h2>에러메시지에 웃음이 난다</h2><br>
+            <h2>시행착오가 즐겁다</h2><br>
+            <h2>로그 출력은 습관이다</h2><br>
+            <h2>컴터 NULL 사랑해</h2><br>
+        </div>
+    </div> 
+<script>
+    var v_curtain = document.querySelector("#id_curtain");
+    var v_ex = 10;
+    function f_show(){
+        //태그 내에 height속성이 정의가 안 되어 있다면 강제 초기값
+        //function 밖에 있으면 더 좋음(상황에 의존)
+        if(!v_curtain.style.height){
+            v_curtain.style.height = "5px"; 
+        }
+        v_curtain.style.height = parseInt(v_curtain.style.height) + v_ex + "px";
+        // 재귀호출로 인해 무한 루핑이니, 종료 조건 필요(여기선 특정 height값!)
+        if(parseInt(v_curtain.style.height) >= innerHeight-50) return; //종료
+        
+        console.log(parseInt(v_curtain.style.height));
+        setTimeout(f_show,50);
+    }
+    window.onload = f_show;
+   
+</script>   
+</body>
+</html>

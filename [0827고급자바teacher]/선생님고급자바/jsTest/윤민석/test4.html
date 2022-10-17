@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    #id_nemo {
+        position: relative;
+        border: 30px groove rgb(236, 99, 174);
+        width: 600px;
+    }
+    #id_inner {
+        display: none;
+        position: absolute;
+        width: 600px; 
+        background-color: black;
+        color: yellow;
+        text-align: center;
+    }
+</style>
+</head>
+<body>
+    <div id="id_nemo">
+        <div id="id_inner">
+            <h1>공지사항</h1><br>
+            <hr><br>
+            <h2>최고의 프로그래머라면</h2><br>
+            <br>
+            <h2>에러메세지에 웃음이 난다</h2><br>
+            <br>
+            <h2>시행착오가 즐겁다</h2><br>
+            <br>
+            <h2>로그 출력은 습관이다</h2><br>
+            <br>
+            <h2>컴터 NULL 사랑해</h2><br>
+        </div>
+    </div>
+<script>
+    var v_nemo = document.querySelector("#id_nemo");
+    var v_inner = document.querySelector("#id_inner");
+    var v_height = 10;
+    function f_long() {
+        // 태그 내에 height 속성이 정의가 안 되어 있다면 강제 초기값
+        // function 밖에 있으면 더 좋음(상황에 의존)
+        if(!v_nemo.style.height) {
+            v_nemo.style.height = "0px";
+        }
+        v_nemo.style.height = parseInt(v_nemo.style.height) + v_height + "px";
+        if(parseInt(v_nemo.style.height) >= 690) {
+            v_inner.style.display = "block";
+            return;
+        }
+        setTimeout(f_long, 30); //재귀 호출
+    }
+    window.onload = f_long;
+</script>
+</body>
+</html>

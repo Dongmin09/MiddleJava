@@ -1,0 +1,162 @@
+package Java;
+
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+
+class Student implements Comparable<Student>{
+	private int id;//학번
+	private String name;
+	private int korScore;
+	private int engScore;
+	private int mathScore;
+	private int total;
+	private int rank;
+	
+	
+	
+	public Student(int id, String name, int korScore, int engScore, int mathScore) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.korScore = korScore;
+		this.engScore = engScore;
+		this.mathScore = mathScore;
+		total = korScore+engScore+mathScore;
+	}
+	
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getKorScore() {
+		return korScore;
+	}
+
+	public void setKorScore(int korScore) {
+		this.korScore = korScore;
+	}
+
+	public int getEngScore() {
+		return engScore;
+	}
+
+	public void setEngScore(int engScore) {
+		this.engScore = engScore;
+	}
+
+	public int getMathScore() {
+		return mathScore;
+	}
+
+	public void setMathScore(int mathScore) {
+		this.mathScore = mathScore;
+	}
+
+	public int getTotal() {
+		return total;
+	}
+
+	public void setTotal(int total) {
+		this.total = total;
+	}
+
+	public int getRank() {
+		return rank;
+	}
+
+	public void setRank(int rank) {
+		this.rank = rank;
+	}
+
+	
+	@Override
+	public int compareTo(Student stu) {
+		return ((Integer)this.getId()).compareTo(stu.getId());
+	
+	}
+
+	@Override
+	public String toString() {
+		return "Student [id=" + id + ", name=" + name + ", korScore="
+				+ korScore + ", engScore=" + engScore + ", mathScore="
+				+ mathScore + ", total=" + total + ", rank=" + rank + "]";
+	}
+}
+
+
+
+class totalDESC implements Comparator<Student>{
+	@Override
+	public int compare(Student stu1, Student stu2) {
+		
+		int result = ((Integer)stu1.getTotal()).compareTo(stu2.getTotal())*-1;
+		if(result == 0) result = stu1.getName().compareTo(stu2.getName());
+		return result;
+		
+	}
+	
+}
+
+
+
+public class StudentTest {
+
+	public static void main(String[] args) {
+		ArrayList<Student> studentList = new ArrayList<>();
+		studentList.add(new Student(1,"이자바",100,60,50));
+		studentList.add(new Student(4,"홍자바",10,30,50));
+		studentList.add(new Student(8,"김자바",90,60,50));
+		studentList.add(new Student(7,"이디비",70,60,40));
+		studentList.add(new Student(6,"강자바",40,20,30));
+		studentList.add(new Student(3,"장자바",60,60,60));
+		studentList.add(new Student(2,"이클립",30,30,30));
+		
+		
+		
+		System.out.println("아직 정렬전");
+		
+		
+		for(Student stu: studentList){
+			stu.setTotal(stu.getTotal());
+			System.out.println(stu);
+		}
+		
+		System.out.println("---------------------------------------");
+		Collections.sort(studentList);
+		System.out.println("내부정렬, 학번을 기준으로, 오름차순(초기값)");
+		for(int i=0; i<studentList.size(); i++){
+			System.out.println(studentList.get(i));
+		}
+		
+		System.out.println("---------------------------------------");
+		Collections.sort(studentList, new totalDESC());
+		System.out.println("외부정렬, 총점을 기준으로 내림차순, 총점이 같은경우 이름을 기준으로 오름차순");
+		for(int i=0; i<studentList.size(); i++){
+			System.out.println(studentList.get(i));
+		}
+		
+		
+		System.out.println("---------------------------------------");
+		for(int i=0; i<studentList.size(); i++){
+			studentList.get(i).setRank(i+1);
+			System.out.println(studentList.get(i));
+		}
+		
+	}
+}

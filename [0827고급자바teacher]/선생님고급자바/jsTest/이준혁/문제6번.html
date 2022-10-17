@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #chart {
+            position: static;
+            border: 1px solid black;
+            height: 500px;
+        }
+
+        .divChart {
+            position: relative;
+            top: 490px;
+            width: 30px;
+            background-color: aqua;
+            border: 1px solid black;
+            transform-origin: center top;
+            transform: rotate(180deg);
+            float: left;
+            margin: 10px;
+        }
+
+        p {
+
+            display: inline-block;
+            position: absolute;
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="id_disp"></div>
+    <input type=text value="80,100,56,120,180,30,40,120,160">
+    <input type=button value="그리기">
+
+    <div id="chart">
+    </div>
+    <script>
+        var v_num = document.querySelector("input[type=text]");
+        var v_button = document.querySelector("input[type=button]");
+        var v_disp = document.querySelector("#id_disp");
+        var v_chart = document.querySelector("#chart");
+        var v_array = v_num.value.split(",");
+
+        v_button.onclick = function () {
+
+            var str = "";
+            for (var i = 0; i < v_array.length; i++) {
+                str += "<p id='text' style ='top: " + (490 - v_array[i]) + "px'>" + v_array[i] + "</p>"
+                str += "<div id ='id_div' class='divChart' style='height:" + v_array[i] + "px'></div>"
+            }
+            v_chart.innerHTML = str;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #id_disp {
+            position: relative;
+            width: 400px;
+            height: 300px;
+            background-color: rgb(136, 200, 243);
+            border: 20px groove rgb(244, 245, 242);
+        }
+    </style>
+</head>
+<body>
+    <div id="id_disp"></div>
+    <input type=text value="80,100,56,120,180,30,40,120,160">
+    <input type=button value="그리기" onclick="f_draw()">
+    <script>
+        var v_disp = document.querySelector("#id_disp");
+        function f_draw() {
+            var v_dataArr = document.querySelector("input[type=text]").value.split(",");
+            
+            v_disp.innerHTML = "";
+
+            var v_initBar = 20;
+            for (var i = 0; i < v_dataArr.length; i++) {
+                var v_bar = document.createElement("div");
+                v_bar.style.backgroundColor = "black";
+                v_bar.style.width = "30px";
+                v_bar.style.position = "absolute";
+                v_bar.style.top = 300 - parseInt(v_dataArr[i]) + "px";
+                v_bar.style.height = v_dataArr[i] + "px";
+                v_bar.style.left = v_initBar + "px";
+                v_initBar += 40;
+                v_disp.appendChild(v_bar);
+                console.log(v_disp.style.height);
+            }
+ 
+            var v_initLabel = 20;
+            for (var j = 0; j < v_dataArr.length; j++) {
+                var v_label = document.createElement("div");
+                v_label.style.color = "red";
+                v_label.style.position = "absolute";
+                v_label.style.top = 270 - parseInt(v_dataArr[j]) + "px";
+                v_label.innerHTML = v_dataArr[j];
+                v_disp.appendChild(v_label);
+                v_label.style.left =  v_initLabel + "px";
+                v_initLabel += 40;
+            }
+        }
+    </script>
+</body>
+</html>

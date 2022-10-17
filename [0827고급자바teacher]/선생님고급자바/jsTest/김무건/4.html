@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)http://192.168.142.3/jsstudy/%eb%ac%b84.html -->
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Document</title>
+    <style>
+        #id_curtain {
+            position: relative;
+            width: 400px;
+            border: 10px groove pink;
+        }
+
+        #message {
+            display: none;
+            text-align: center;
+            position: absolute;
+            margin-left: 5px;
+            margin-top: 5px;
+            width: 400px;
+            height: 511px;
+            background-color: black;
+            color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <div id="id_curtain" style="height: 340px;">
+
+        <div id="message">
+            <h1>공지사항</h1>
+            <hr>
+            <h1>에러 메시지에 웃음이 난다</h1>
+            <br>
+            <h1>시행착오가 즐겁다</h1>
+            <br>
+            <h1>로그 출력은 습관이다.</h1>
+        </div>
+
+    </div>
+
+
+    <script>
+
+        var v_curtain = document.querySelector("#id_curtain");
+        var message = document.querySelector("#message");
+        var v_ex = 10;
+        function f_show() {
+            //태그 내에 height속성이 정의가 안 되어 있다면 강제 초기값
+            //function 밖에 있으면 더 좋음(상황에 의존)
+            if (!v_curtain.style.height) {
+                v_curtain.style.height = "0px";
+            }
+            v_curtain.style.height = parseInt(v_curtain.style.height) + v_ex + "px";
+            // 재귀호출로 인해 무한 루핑이니, 종료 조건 필요(여기선 특정 height값!)
+            if (parseInt(v_curtain.style.height) >= 500) {
+                message.style.display = "block";
+                return ;
+            }
+
+            setTimeout(f_show, 150);
+        }
+
+        window.onload = f_show;
+
+    </script>
+
+</body>
+
+</html>

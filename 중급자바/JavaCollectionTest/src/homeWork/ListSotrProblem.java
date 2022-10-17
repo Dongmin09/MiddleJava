@@ -1,0 +1,163 @@
+package homeWork;
+
+//학번, 이름, 국어점수, 영어점수, 수학점수, 총점, 등수를 멤버로 갖는
+
+//Student클래스를 만든다.
+//생성자는 학번, 이름, 국어, 영어, 수학 점수만 매개변수로 받아서 처리한다.
+//
+//이 Student객체들은 List에 저장하여 관리한다.
+//List에 저장된 데이터들을 학번의 오름차순으로 정렬하여 출력하는 부분과
+//총점의 역순으로 정렬하는 부분을 프로그램 하시오.
+//(총점이 같으면 학번의 내림차순으로 정렬되도록 한다.)
+//(학번 정렬기준은 Student클래스 자체에서 제공하도록 하고,
+// 총점 정렬기준은 외부클래스에서 제공하도록 한
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Comparator;
+
+public class ListSotrProblem {
+	public static void main(String[] args) {
+
+		List<Student> stulist = new ArrayList<Student>();
+
+		stulist.add(new Student("1", "백작", 100, 50, 50));
+		stulist.add(new Student("4", "남작", 80, 50, 60));
+		stulist.add(new Student("3", "공작", 70, 70, 80));
+		stulist.add(new Student("5", "후작", 60, 50, 70));
+		stulist.add(new Student("8", "평민", 50, 100, 50));
+
+		Collections.sort(stulist);
+
+		for (Student stu : stulist) {
+			System.out.println(stu);
+
+		}
+
+		System.out.println("==============================================");
+
+		Collections.sort(stulist, new SortTotalDesc());
+
+		for (Student stu : stulist) {
+
+			System.out.println(stu);
+
+		}
+
+	}
+
+	// 자바 순위 정렬
+	
+}
+
+class SortTotalDesc implements Comparator<Student> {
+
+	@Override
+	public int compare(Student stu1, Student stu2) {
+		if (stu1.getTotal() == stu2.getTotal()) {
+
+			return stu1.getNum().compareTo(stu2.getNum()) * -1;
+
+		} else {
+
+			return new Integer(stu1.getTotal()).compareTo(stu2.getTotal()) * -1;
+		}
+
+	}
+
+}
+
+
+class Student implements Comparable<Student> {
+
+	private String num;
+	private String name;
+	private int korea;
+	private int english;
+	private int math;
+	private int total;
+	private int lank;
+
+	public Student(String num, String name, int korea, int english, int math) {
+		super();
+		this.num = num;
+		this.name = name;
+		this.korea = korea;
+		this.english = english;
+		this.math = math;
+		this.total = this.korea + this.math + this.english;
+
+	}
+
+	public String getNum() {
+		return num;
+	}
+
+	public void setNum(String num) {
+		this.num = num;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getKorea() {
+		return korea;
+	}
+
+	public void setKorea(int korea) {
+		this.korea = korea;
+	}
+
+	public int getEnglish() {
+		return english;
+	}
+
+	public void setEnglish(int english) {
+		this.english = english;
+	}
+
+	public int getMath() {
+		return math;
+	}
+
+	public void setMath(int math) {
+		this.math = math;
+	}
+
+	public int getTotal() {
+		return total;
+	}
+
+	public void setTotal(int total) {
+		this.total = total;
+	}
+
+	public int getLank() {
+		return lank;
+	}
+
+	public void setLank(int lank) {
+		this.lank = lank;
+	}
+
+	@Override
+	public int compareTo(Student stu) {
+
+		return this.getNum().compareTo(stu.getNum());
+	}
+
+	@Override
+	public String toString() {
+		return "Student [num=" + num + ", name=" + name + ", korea=" + korea + ", english=" + english + ", math=" + math
+				+ ", total=" + total;
+	}
+
+}
+

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member">
+
+ 	<insert id="insertMember" parameterType="mVo">
+ 		INSERT INTO MYMEMBER
+ 			   (MEM_ID, MEM_NAME, MEM_TEL, MEM_ADDR)
+ 		VALUES (#{memId}, #{memName}, #{memTel}, #{memAddr})
+ 	</insert>
+ 	
+ 	<update id="updateMember">
+ 		UPDATE MYMEMBER
+ 		SET MEM_NAME = #{memName}
+ 		  , MEM_TEL = #{memTel}
+ 		  , MEM_ADDR = #{memAddr}
+ 		WHERE MEM_ID = #{memId}
+ 	</update>
+ 	
+ 	<delete id="deleteMember" parameterType="String">
+ 		DELETE FROM MYMEMBER WHERE MEM_ID = #{memId}
+ 	</delete>
+ 	
+ 	<resultMap type="mVo" id="mapMember">
+ 		<result property="memId" column="mem_id" />
+ 		<result property="memName" column="mem_name" />
+ 		<result property="memTel" column="mem_tel" />
+ 		<result property="memAddr" column="mem_addr" />
+ 	</resultMap>
+
+ 	<select id="selectMember" resultMap="mapMember">
+ 		SELECT *
+ 	    FROM   MYMEMBER
+ 	</select>
+ 	
+ 	<select id="searchMember" resultMap="mapMember">
+ 		SELECT *
+ 		FROM   MYMEMBER
+ 		WHERE  1 = 1
+ 		<if test="memId != null and memId != ''">
+ 		AND    MEM_ID = #{memId} </if>
+ 		<if test="memName != null and memName != ''">
+ 		AND    MEM_NAME = #{memName} </if>
+ 		<if test="memTel != null and memTel != ''">
+ 		AND    MEM_TEL = #{memTel} </if>
+ 		<if test="memAddr != null and memAddr != ''">
+ 		AND    MEM_ADDR LIKE '%' || #{memAddr} || '%' </if>
+ 	</select>
+ 	
+ 	<select id="checkMember" parameterType="mVo" resultType="int">
+ 		SELECT COUNT(*) as CNT
+ 		FROM   MYMEMBER
+ 		WHERE  MEM_ID = #{memId}
+ 	</select>
+ 	
+</mapper>

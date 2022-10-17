@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    #point {
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        left: 250px;
+        top: 250px;
+        background-color: rgba(249, 7, 7, 0.5);
+        
+    }
+    #wrapper {
+        border: 1px solid black;
+        width: 500px;
+        height: 500px;
+        border-radius: 50%;
+        position: relative;
+        left: 200px;
+        top: 200px;
+        overflow: hidden;
+        /* border: 1px solid magenta; */
+        transform-origin: center center; /* 회전 중심 설정 */
+    }
+</style>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="point"></div>
+    </div>
+<script>
+    var v_wrapper = document.querySelector("#wrapper");
+    var v_gak = 0;
+    var chk = true;
+    function f_rotate() {
+        v_gak = (v_gak + 5) % 360;
+        v_wrapper.style.transform = "rotate(" + v_gak + "deg)";
+        setTimeout(f_rotate, 50);
+    }
+    f_rotate(); //함수 콜
+</script>
+</body>
+</html>

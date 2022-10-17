@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+    var random = [];
+    var minNum = 99;
+    for(var i = 0; i <20; i++) {
+        random.push(Math.floor(Math.random()*100 + 1));
+    }
+    function f_random(p_num) {
+        for(var i = 0; i < 20; i++) {
+            if(minNum > random[i]) {
+                minNum = random[i];
+            }
+        }
+        console.log(minNum);
+    }
+    f_random(random);
+</script>

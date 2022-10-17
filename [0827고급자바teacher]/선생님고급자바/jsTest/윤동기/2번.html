@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="id_disp"></div>
+    <script>
+
+        var v_arr = [];
+        for (var i = 0; i < 20; i++) {
+            v_arr.push( Math.floor(Math.random()*50));
+            id_disp.innerHTML += "<h7>" + v_arr[i] + "</h7> ";
+        }
+
+        function arrMin(v_arr) {
+            var min = v_arr[0];
+            for(var i = 0; i < v_arr.length; i++) {
+                if(min > v_arr[i]){
+                    min = v_arr[i];
+                }
+            }
+            return min;
+        }
+        id_disp.innerHTML += "<h2>" + "최소값 : " + arrMin(v_arr) + "</h2> ";
+
+    </script>
+</body>
+
+</html>

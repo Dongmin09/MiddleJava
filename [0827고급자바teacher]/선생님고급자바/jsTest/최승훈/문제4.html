@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #id_disp {
+            position: relative;
+            border: 15px groove red;
+
+        }
+
+        #id_disp2 {
+            position: absolute;
+            text-align: center;
+            background-color: black;
+            color: white;
+            display: none;
+            width: 100%;
+            height: 100%;
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="id_disp">
+        <div id="id_disp2">
+            <h1>공지사항</h1>
+            <hr>
+            <h2>최고의 프로그래머라면</h2>
+            <h2>에러메시지에 웃음이 난다</h2>
+            <h2>시행착오가 즐겁다</h2>
+            <h2>로그 출력은 습관이다</h2>
+            <h2>컴터 null 사랑해</h2>
+            <h2>집에 가고 싶다.</h2>
+            <h2>금욜에 빤스런 친다.</h2>
+            <h2>중프 중프</h2>
+        </div>
+    </div>
+
+    <script>
+
+        var v_disp = document.querySelector("#id_disp");
+        var v_disp2 = document.querySelector("#id_disp2");
+        var v_hei = 20;
+        window.onload = f_move();
+
+        function f_move() {
+            if (!v_disp.style.height) {
+                v_disp.style.height = "5px";
+            }
+            v_disp.style.height = parseInt(v_disp.style.height) + v_hei + "px";
+            if (parseInt(v_disp.style.height) >= 600) {
+                v_disp2.style.display = "block";
+                return;
+            }
+            setTimeout(f_move, 50);
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>문제5번</title>
+    <style>
+        #redal {
+            width: 500px;
+            height: 500px;
+            position: relative;
+
+            /* border: 1px solid lightcoral; */
+            transform-origin: center top;
+        }
+
+        #circle1 {
+            position: absolute;
+            /* 모서리 둥글게  동그라미*/
+            border-radius: 50%;
+            border: 1px solid black;
+            /* 부모기준으로 따라감 */
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #nemo {
+            width: 250px;
+            height: 250px;
+            background-color: pink;
+            transform: rotate(10deg);
+            transform-origin: right bottom;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+
+<body>
+    <div id=redal>
+        <div id="circle1" class="common">
+            <div id="nemo" class="triangle"></div>
+        </div>
+    </div>
+    <script>
+        var v_nemo = document.querySelector("#nemo");
+        var v_gak = 10;
+        function v_nemoRotate() {
+            v_gak += 10;
+            v_nemo.style.transform = "rotate(" + v_gak + "deg)";
+            setTimeout(v_nemoRotate, 500);
+        }
+        v_nemoRotate();
+    </script>
+</body>
+
+</html>

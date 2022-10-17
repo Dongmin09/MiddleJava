@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+    //배열 다루기
+var v_ranDatas = []; //빈 배열 생성
+
+for(var i=1; i<=20; i++) {
+    v_ranDatas.push(Math.ceil(Math.random()*45));
+    //v_ranDatas[v_ranDatas.length] = Math.ceil(Math.random()*45); 위 코드와 동작이 정확히 같음.
+}
+
+alert("만들어진 배열은 : " + v_ranDatas);
+
+var v_minValue = v_ranDatas[0]; //첫번째 index의 값이 최소라고 가정
+for(var i=1; i<v_ranDatas.length; i++) {
+    if(v_ranDatas[i] < v_minValue){
+        v_minValue = v_ranDatas[i];
+    }
+}
+
+alert("최소값은: " + v_minValue + "입니당." )
+</script>
+

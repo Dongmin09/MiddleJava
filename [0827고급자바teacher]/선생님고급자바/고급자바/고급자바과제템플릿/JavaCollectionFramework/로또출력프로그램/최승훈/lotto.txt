@@ -1,0 +1,88 @@
+package mhjm;
+
+import java.util.Scanner;
+
+public class LottoTest {
+
+	public static void main(String[] args) {
+		final int GAMEMONEY = 1000;
+		int gameNum; // 게임횟수
+		int change; // 거스름돈
+		boolean game = true;
+		Lotto lt = new Lotto();
+		Scanner sc = new Scanner(System.in);
+		int[] num = new int[45];
+		int[] randomNum = new int[45];
+		while (game) {
+
+			lt.lotto();
+			int menuNum = sc.nextInt();
+			switch (menuNum) {
+			case 1: {
+				System.out.println();
+				lt.ltStart();
+				int money = sc.nextInt();
+				gameNum = money / GAMEMONEY; // 게임횟수 구하기
+				change = money % GAMEMONEY; // 거스름돈 구하기
+
+				for (int i = 0; i < num.length; i++) {
+					num[i] = i + 1;
+					// 인덱스 0부터 44까지 1~45숫자 집어넣기
+				}
+				for (int i = 0; i < gameNum; i++) {// 게임 횟수만큼 반복실행
+					randomNum = randomNumber(num); // 1 ~ 45까지 초기화된 수를 섞어줌
+					System.out.print("로또번호" + (i + 1) + ": ");
+					showNumber(randomNum);
+					System.out.println("\n");
+				}
+				System.out.printf("거스름돈은 %d원 입니다.", change);
+				break;
+			}
+
+			case 2:
+
+				System.out.println("\n프로그램을 종료합니다.");
+				game = false;
+				break;
+
+			}
+
+		}
+	}
+
+	private static void showNumber(int[] numbers) {
+		for (int i = 0; i < 6; i++) {
+			System.out.printf("%d ", numbers[i]);
+		}
+
+	}
+
+	private static int[] randomNumber(int[] numbers) {
+		for (int i = 0; i < 45; i++) {
+			int rand = (int) (Math.random() * 44) + 1;
+			int temp;
+			temp = numbers[0];
+			numbers[0] = numbers[rand];
+			numbers[rand] = temp;
+
+		}
+		return numbers;
+	}
+
+}
+
+
+
+class Hotel {
+	int roomNum;
+	String name;
+	
+
+	public void menu() {
+System.out.print("\n*******************************************\r\n"
+		+ "어떤 업무를 하시겠습니까?\r\n"
+		+ "1.체크인  2.체크아웃 3.객실상태 4.업무종료\r\n"
+		+ "*******************************************\r\n"
+		+ "메뉴선택 =>");
+	}
+}

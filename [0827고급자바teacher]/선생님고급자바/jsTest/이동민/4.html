@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    #id_curtain {
+        width:400px;
+        border:10px groove pink;
+
+    }
+    #id_content{
+        font-size: 30px;
+        
+    }
+</style>
+</head>
+<body>
+    <div id="id_curtain">
+        <div id="id_content">
+            나는 프로그래머다. <br><br>
+            나는 프로그래머다2. <br><br>
+            나는 프로그래머다3. <br><br><br><br>
+            나는 프로그래머다4. <br><br><br>
+            나는 프로그래머다5. <br><br>
+        </div>
+    </div> 
+<script>
+    var v_curtain = document.querySelector("#id_curtain");
+    var v_ex = 10;
+    function f_show(){
+        //태그 내에 height속성이 정의가 안 되어 있다면 강제 초기값
+        //function 밖에 있으면 더 좋음(상황에 의존)
+        if(!v_curtain.style.height){
+            v_curtain.style.height = "0px"; 
+        }
+        v_curtain.style.height = parseInt(v_curtain.style.height) + v_ex + "px";
+        // 재귀호출로 인해 무한 루핑이니, 종료 조건 필요(여기선 특정 height값!)
+        if(parseInt(v_curtain.style.height) > window.innerHeight-10) return; //쫑룡
+        setTimeout(f_show,100);
+    }
+    window.onload = f_show;
+</script>   
+</body>
+</html>

@@ -1,0 +1,168 @@
+package Example;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+public class StudentTest {
+	public static void main(String[] args) {
+		List<Student> StudList = new ArrayList<Student>();
+
+		StudList.add(new Student("202201", "우영우", 87, 90, 54));
+		StudList.add(new Student("202202", "권민우", 87, 90, 54));
+		StudList.add(new Student("202203", "제인", 77, 64, 100));
+		StudList.add(new Student("202204", "사스케", 100, 100, 100));
+		StudList.add(new Student("202205", "나루토", 20, 30, 80));
+		StudList.add(new Student("202206", "홍길동", 87, 90, 54));
+		StudList.add(new Student("202207", "심형래", 65, 98, 88));
+
+		System.out.println("===========================");
+		Collections.sort(StudList, new total());
+		System.out.println("총점이 같으면 학번의 내림차순 : ");
+		int i = 0;
+		int score_total = 0;
+		for (Student student : StudList) {
+			if (score_total != student.getTotal()) {
+				i++;
+			}
+			student.rank = i;
+			score_total = student.getTotal();
+			System.out.println(student);
+			
+		}
+		System.out.println("===========================");
+		Collections.sort(StudList);
+		System.out.println("학번을 오름차순으로 정렬 후 :");
+		for (Student student : StudList) {
+			System.out.println(student);
+		}
+		System.out.println("===========================");
+		
+		Collections.sort(StudList, new StdDesc());
+		System.out.println("총점을 내림차순으로 정렬 후 :");
+		for (Student student : StudList) {
+			System.out.println(student);
+		}
+
+
+	}
+
+}
+//총점이 같으면 학번을 내림차순
+class total implements Comparator<Student> {
+
+	@Override
+	public int compare(Student total1, Student total2) {
+		if (total1.getTotal() == total2.getTotal()) {
+			return new String(total1.getStdNum()).compareTo(total2.getStdNum()) * -1;
+		} else {
+			return 0;
+		}
+	}
+
+}
+//총점을 역순으로 정렬
+class StdDesc implements Comparator<Student> {
+
+	@Override
+	public int compare(Student std1, Student std2) {
+		return new Integer(std1.getTotal()).compareTo(std2.getTotal()) * -1;
+	}
+
+}
+
+class Student implements Comparable<Student> {
+
+	// 필드
+	private String StdNum;
+	private String StdName;
+	private int KorSum;
+	private int MathSum;
+	private int EngSum;
+
+	private int total;
+	int rank;
+
+	// 생성자
+	public Student(String stdNum, String stdName, int korSum, int mathSum, int engSum) {
+		super();
+		StdNum = stdNum;
+		StdName = stdName;
+		KorSum = korSum;
+		MathSum = mathSum;
+		EngSum = engSum;
+		total = korSum + engSum + mathSum;
+	}
+
+	public String getStdNum() {
+		return StdNum;
+	}
+
+	public void setStdNum(String stdNum) {
+		StdNum = stdNum;
+	}
+
+	public String getStdName() {
+		return StdName;
+	}
+
+	public void setStdName(String stdName) {
+		StdName = stdName;
+	}
+
+	public int getKorSum() {
+		return KorSum;
+	}
+
+	public void setKorSum(int korSum) {
+		KorSum = korSum;
+	}
+
+	public int getMathSum() {
+		return MathSum;
+	}
+
+	public void setMathSum(int mathSum) {
+		MathSum = mathSum;
+	}
+
+	public int getEngSum() {
+		return EngSum;
+	}
+
+	public void setEngSum(int engSum) {
+		EngSum = engSum;
+	}
+
+	public int getTotal() {
+		return total;
+	}
+
+	public void setTotal(int total) {
+		this.total = KorSum + MathSum + EngSum;
+	}
+
+	public int getRank() {
+
+		return rank;
+
+	}
+
+	public void setRank(int rank) {
+		this.rank = rank;
+
+	}
+
+	@Override
+	public String toString() {
+		return "서래마을학원 학번=" + StdNum + ", 이름=" + StdName + ", 국어점수=" + KorSum + ", 수학점수=" + MathSum + ", 영어점수=" + EngSum
+				+ ", 총점수=" + total + ", 등수=" + rank + "]";
+	}
+
+	@Override
+	public int compareTo(Student o) {
+		return new Integer(o.getStdNum().compareTo(o.getStdNum()));
+	}
+
+}

@@ -1,0 +1,100 @@
+package homework;
+
+import java.io.*;
+import java.util.*;
+
+public class Hotel {
+	static Map<String, String> hotel = new HashMap<>();
+	
+	public static void loadFile() throws Exception {
+		FileReader fr = new FileReader("d:/D_Other/hotel.txt");
+		BufferedReader br = new BufferedReader(fr);
+		String temp = "";
+		while((temp = br.readLine()) != null) {
+			String[] customer = temp.split(" ");
+			hotel.put(customer[0], customer[1]);
+		}
+		br.close();
+	}
+	public static void saveFile() throws Exception {
+		FileOutputStream fos = new FileOutputStream("d:/D_Other/hotel.txt");
+		PrintStream out = new PrintStream(fos);
+		Set<Map.Entry<String, String>> entrySet = hotel.entrySet();
+		Iterator<Map.Entry<String, String>> entryIt = entrySet.iterator();
+		while (entryIt.hasNext()) {
+			Map.Entry<String, String> entry = entryIt.next();
+			out.print(entry.getKey() + " " + entry.getValue() + "\n");
+		}
+		out.close();
+	}
+	public static void main(String[] args) throws Exception {
+		Scanner scn = new Scanner(System.in);
+		hotel = new HashMap<>();
+		System.out.println("************************");
+		System.out.println("호텔 문을 열었습니다.");
+		System.out.println("************************");
+		loadFile();
+		while (true) {
+			System.out.println("******************************************");
+			System.out.println("어떤 업무를 하시겠습니까?");
+			System.out.println("1. 체크인  2.체크아웃 3.객실상태 4.업무종료");
+			System.out.println("******************************************");
+			System.out.print("메뉴선택 => ");
+			int menu = scn.nextInt();
+			System.out.println();
+			if (menu == 1) { 
+				System.out.println("어느방에 체크인 하시겠습니까?");
+				System.out.print("방번호 입력 => ");
+				String room = scn.next();
+				System.out.println();
+				System.out.println("누구를 체크인 하시겠습니까?");
+				System.out.print("이름 입력 => ");
+				String name = scn.next();
+				System.out.println();
+				if (hotel.get(room) == null) {
+					hotel.put(room, name);
+					System.out.println("체크인 되었습니다");
+					System.out.println();
+					continue;
+				} else {
+					System.out.println(room + "방에는 이미 사람이 있습니다.");
+					System.out.println();
+					continue;
+				}
+
+			}
+			if (menu == 2) {
+				System.out.println("어느방을 체크아웃 하시겠습니까?");
+				System.out.print("방번호 입력 => ");
+				String room = scn.next();
+				if (hotel.get(room) == null) {
+					System.out.println(room + "방에는 체크인한 사람이 없습니다.");
+					System.out.println();
+					continue;
+				} else {
+					hotel.remove(room);
+					System.out.println("체크아웃 되었습니다.");
+					System.out.println();
+					continue;
+				}
+			}
+			if (menu == 3) {
+				Set<Map.Entry<String, String>> entrySet = hotel.entrySet();
+				Iterator<Map.Entry<String, String>> entryIt = entrySet.iterator();
+				while (entryIt.hasNext()) {
+					Map.Entry<String, String> entry = entryIt.next();
+					System.out.print("방번호 : " + entry.getKey() + ", 투숙객 : " + entry.getValue() + "\n");
+				}
+				System.out.println();
+				continue;
+			}
+			if (menu == 4) { // OutputStream 저장
+				saveFile();
+				System.out.println("************************");
+				System.out.println("호텔 문을 닫았습니다.");
+				System.out.println("************************");
+				break;
+			}
+		}
+	}
+}

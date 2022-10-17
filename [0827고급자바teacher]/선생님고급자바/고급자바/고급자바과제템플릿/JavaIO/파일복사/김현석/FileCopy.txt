@@ -1,0 +1,32 @@
+package homework;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+public class TulipTest {
+	public static void main(String[] args) throws IOException {
+		long startTime = System.currentTimeMillis();
+		File 원본 = new File("E:/D_Other/Tulips.jpg");
+		File 복사본 = new File("E:/D_Other/복사본_Tulips.jpg");
+		
+		FileInputStream input = new FileInputStream(원본);
+		FileOutputStream output = new FileOutputStream(복사본);
+		
+		byte[] buf = new byte[1024];
+		
+		int readData;
+		while((readData = input.read(buf)) > 0) {
+			output.write(buf,0,readData);
+		}
+		
+		input.close();
+		output.close();
+		System.out.println("작업끝..");
+		
+		long endTime = System.currentTimeMillis();
+		
+		System.out.println("경과 시간(ms) : " + (endTime - startTime));
+	}
+}

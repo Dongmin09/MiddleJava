@@ -1,0 +1,48 @@
+package homework;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+public class Copy {
+public static void main(String[] args) {
+	
+	// 파일 읽기위한 스트림 객체 생성
+			FileInputStream fis = null;
+			FileOutputStream fos = null;
+			BufferedInputStream bis = null;
+			BufferedOutputStream bos = null;
+			long startTime = System.currentTimeMillis();
+			
+			
+			try {
+				fis = new FileInputStream("d:/D_Other/pepe1.jpg");
+				fos = new FileOutputStream("d:/D_Other/복사본_pepe1.jpg");
+				
+				bis = new BufferedInputStream(fis);
+				bos = new BufferedOutputStream(fos);
+				
+				int data;
+				// 읽어온 값이 -1 이면 파일의 끝까지 읽었다는 의미
+				while((data = bis.read()) != -1) {
+					bos.write(data);
+					
+			}
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					bis.close();
+					bos.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			long endTime = System.currentTimeMillis();
+			System.out.println("경과 시간(ms) : " + (endTime - startTime));
+
+
+}
+}

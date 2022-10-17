@@ -1,0 +1,64 @@
+package Example;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
+import java.util.Set;
+
+public class LottoTest {
+
+	public static void main(String[] args) {
+		System.out.println("===========================");
+		System.out.println("       Lotto 프로그램");
+		System.out.println("===========================");
+		while (true) {
+			System.out.println("1. Lotto 구입");
+			System.out.println("2. 프로그램 종료 ");
+			System.out.println("===========================");
+			Scanner scanner = new Scanner(System.in);
+			int menu = scanner.nextInt();
+			switch (menu) {
+			case 1:
+				System.out.println("Lotto 구입 시작");
+				System.out.print("금액 입력 :");
+				int coin = scanner.nextInt();
+				System.out.println();
+				int lotto = 1000;
+				int Addnum = coin / lotto;
+				int Hnum = coin % lotto;
+				
+				for (int i = 1; i <= Addnum; i++) {
+					Set<Integer> intRnd = new HashSet<Integer>();
+					while (intRnd.size() <= 5) {
+						int num = (int) (Math.random() * 45 + 1);
+						intRnd.add(num);
+					}
+					List<Integer> intRndList = new ArrayList<Integer>(intRnd);
+					Collections.sort(intRndList);
+					System.out.print("로또번호"+i+ ":" + intRndList);
+					System.out.println();
+				}
+				if(lotto >coin) {
+					System.out.println("잔액이 부족합니다. 로또는 천원입니다.");
+				}else {
+					System.out.println("받은금액 :" + coin + "\t거스름돈 : " + Hnum);
+					
+				}
+				break;
+			case 2:
+				System.out.println("감사합니다.");
+				return;
+
+			default:
+				break;
+			}
+
+		}
+
+	}
+
+}

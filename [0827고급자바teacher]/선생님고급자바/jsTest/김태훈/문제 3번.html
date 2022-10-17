@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    #id_parent {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .child {
+        position: absolute;
+        width: 820px;
+        height: 200px;
+        border: 5px solid blue;
+    }
+
+</style>
+</head>
+<body>
+<script>
+/*
+수업시간에 했던 overflow.html의 style을 인용
+
+display는 div의 속성값으로 default 값은 block으로 되어있는데 block일 때는
+그 행의 끝까지 차지하기 때문에 옆에 공간이 있더라도 어떤 요소도 위치 시킬수 없다.
+inline-block으로 변경을 해주면 공간이 있을 때 그곳에 위치 할 수 있다. 
+display가 none이면 해당 영역을 차지하지도 않고 숨어 보이지 않게 만든다. 
+visibility:hidden 을 쓰면 영역의 위치는 차지하지만 숨김이 된다.
+
+positon은 default는 static이고 보통 자손에는 relative, 후손에는 absolute를 주어야하고
+그 기준점은 부모의 왼쪽 위 모서리이다.
+position에 static인 상황에서 위치의 이동을 시켜주려고하면 이동되지 않음.
+relative를 시켜주고서 위치를 이동시켜야 이동이 가능하다.
+
+overflow: hidden; 지정된 영역을 넘어가지 않게 해준다. 넘어간 부분을 잘라냄.
+overflow : scroll;  넘치면 스크롤바를 만든다.
+
+z-index는 z축의 index. z축은 화면에서 수직으로 올라오는 방향
+따라서 여러 요소들을 올리면 겹쳐서 올라오게 됨
+먼저 쓰여진 요소부터 위로 쌓이게 되는데 z-index에 넣는 수의 크기로
+우선순위를 지정할 수 있음. 크기가 클 수록 위에 위치함.
+
+transform(rotate, skewX) 
+rotate라는 속성을 주면 회전을 시켜줌.
+skewX는 X축으로 기울여 준다.  
+
+CSS선택자
+* 모든 것이라는 뜻 
+#은 id를 불러오고 
+.은 calss를 불러온다. 
+두개가 다 있으면 #변수명1.변수명2 and조건 1번과 2번 모두 만족
+ex)ydg.ggg => id가 ydg이면서 class가 ggg인 것, and 연산
+> 는 직계 자손만 영향을 주고 스페이스(빈공백)은 하위 자손들 모두 영향
+ex)div > .merong(직계 자식만), div .merong(한칸 뛰면 div 자손들까지)  
+*/
+</script>    
+</body>
+</html>

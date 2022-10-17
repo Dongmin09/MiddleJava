@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>문제3번</title>
+    <style>
+        #main1 {
+            width: 300px;
+            height: 400px;
+            background: tomato;
+        }
+
+        #main2 {
+            width: 300px;
+            height: 400px;
+            background: tomato;
+            position: relative;
+        }
+
+        #id_disp {
+            height: 50px;
+            width: 50px;
+            border: 1px solid black;
+
+        }
+
+        #id_static {
+            width: 200px;
+            height: 100px;
+            border: 1px solid;
+            background: yellow;
+            text-align: center;
+            line-height: 100px;
+            box-sizing: border-box;
+        }
+
+        .relative {
+            position: relative;
+            top: 28px;
+            left: 48px;
+        }
+
+        .absolute {
+            position: absolute;
+            bottom: 8px;
+            right: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="id_disp" style="display: block">block</div>
+    <input type="button" value="display변경" onclick="f_onClick()">
+    <div id="main1">
+        <div id="id_static">position static</div>
+        <div id="id_static" class="relative">position relative</div>
+        <div id="id_static">position static</div>
+    </div><br>
+    <div id="main2">
+        <div id="id_static">position static</div>
+        <div id="id_static" class="absolute">position absolute</div>
+        <div id="id_static">position static</div>
+    </div>
+    <script>
+        //display속성은 none과 block이 있으며 none 화면에서 지우고 block는 화면
+        //에 표시할수있는 속성이다.
+        var v_disp = document.querySelector('#id_disp');
+        var display = true; function f_onClick() {
+            if (v_disp.style.display == "block") {
+                v_disp.style.display = "none";
+            }
+        }
+        //position은 html문서상의 요소를 배치하는 방식을 결정한다.
+        //position의 속성으로는 static, absolute, relative가 있다.
+        //position의 기본 값은 static이며 static인 요소는 html상 원래 있어야 위치를 알려준다.
+        //position: relative는 요소를 static의 위치에서 벗어나게 위치할수있게 해줍니다.
+        //position: absolute는 자신의 위치를 상위 요소에서 찾으며 상위의 속성에 따라 변하게 되는
+        //속성입니다.
+
+        //overflow는 자식 요소를 상위 요소에 맞춰주는 속성이며 visible과 hidden, scroll이있으며
+        //visible은 상위요소보다 자식요소의 크기가 커도 보여주는 속성이다.
+        //hidden은 자식요소가 상위요소보다 크다면 빠져나오는 부분을 숨겨버린다.
+        //scroll의 경우 hidden처럼 빠져나가는 요소가 있어도 scroll을 통해 볼수 있게 해준다.
+        //auto의 경우 빠져나오는 부분이 있으면 scroll로 아니면 hidden을 보여준다.
+
+        //z-index는 요소가 겹쳤을 경우 우선순위를 정해주는 속성이다.
+
+        //transform은 요소의 이동 및 변형을 시키는 속성이다.
+        //translate의 경우 translate(300px, 300px); x축과 y축으로 이동시킨다.
+        //scale(0.5, 2);의 경우 (가로길이 곱한는 수,세로길이에 곱하는 수) 가로와 세로길이를 변경한다.
+        //rotate(30deg)의 경우 요소를 시계방향으로 회전시킨다. 이경우 tranform-origin을 통해 중앙값을 정해준다.
+
+        //css선택자의 종류로는 아이디 선택자(#아이디), 클래스 선택자(.클래스)
+        //속성 선택자([속성=값])이 있다. 후손선택자는 선택자1 선택자2로 선택자1아래에 선택자2를 선택할수 있다.
+    </script>
+</body>
+
+</html>

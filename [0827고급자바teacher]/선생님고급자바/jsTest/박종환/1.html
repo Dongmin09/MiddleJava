@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+           시간   1   2   3   4    5   6
+           움직임 3   -2  3   -2   3  -2
+           결과   3   1   4    2   5   3 
+           */
+
+        var roze = 0;
+        var second = 0;
+        var checknum =0;
+
+        function f_sec(p_num) { 
+            for (var i = 0; i < p_num; i++) {
+
+                if (i % 2 == 0) f_plusDistance(3);
+                if (i % 2 == 1) f_minusDistance(2);
+                second ++;
+            }
+            console.log("거리", roze);
+            f_retSeconds(p_num);
+        }
+
+        function f_plusDistance(p_distance) {
+            console.log("움직임", p_distance);
+            checknum ++;
+            return roze += p_distance;
+
+        }
+
+        function f_minusDistance(p_distance) {
+            checknum++;
+            console.log("움직임", -p_distance);
+            return roze -= p_distance;
+        }
+        
+        function f_retSeconds(second) {
+            return console.log(second + "초 ");
+        }
+        f_sec(5); //  초를 매개변수로 
+
+       
+
+
+
+
+
+
+        
+
+    </script>
+
+</body>
+
+</html>

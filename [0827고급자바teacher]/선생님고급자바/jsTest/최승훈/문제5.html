@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #id_one {
+            position: relative;
+            border-radius: 50%;
+            border: 2px solid black;
+            overflow: hidden;
+        }
+
+        #wendy{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            
+        }
+
+        #id_spin {
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            background-color: blue;
+            transform-origin: bottom right;
+            opacity: 0.4;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="id_one">
+        <img src="../07-26 images/웬디2.jpg" id="wendy">
+        <div id="id_spin"></div>
+    </div>
+
+</body>
+<script>
+
+    var v_spin = document.querySelector('#id_spin');
+    var v_one = document.querySelector('#id_one');
+    var v_gak = 0;
+
+    function f_spin() {
+        v_one.style.width = window.innerWidth * 0.96 + "px";
+        v_one.style.height = v_one.style.width;
+        v_gak = (v_gak + 5) % 360;
+        v_spin.style.transform = "rotate(" + v_gak + "deg)";
+        setTimeout(f_spin, 80);
+    }
+
+    f_spin();
+</script>
+
+</html>

@@ -1,0 +1,145 @@
+﻿package work;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+public class StudentList {
+	public static void main(String[] args) {
+		List<Student> stList = new ArrayList<Student>();
+
+		stList.add(new Student("20162996", "박관우", 90, 70, 50));
+		stList.add(new Student("20192934", "김지호", 90, 95, 100));
+		stList.add(new Student("20142932", "이용석", 70, 100, 70));
+		stList.add(new Student("20172912", "박상철", 50, 20, 20));
+		stList.add(new Student("20152922", "심주희", 80, 90, 40));
+
+		System.out.println("정렬 전: ");
+		for (Student stl : stList) {
+			System.out.println(stl);
+		}
+		System.out.println("----------------------------------");
+
+		Collections.sort(stList);
+		System.out.println("학번의 오름차순: ");
+		for (Student stl : stList) {
+			System.out.println(stl);
+		}
+		System.out.println("----------------------------------");
+
+		Collections.sort(stList, new SumDesc());
+		System.out.println("총점의 내림차순: ");
+		for (Student stl : stList) {
+			System.out.println(stl);
+		}
+	}
+}
+
+package work;
+
+public class Student implements Comparable<Student> {
+	private String num;
+	private String name;
+	private int guk;
+	private int young;
+	private int math;
+	private int sum;
+	private int rank;
+
+	public Student(String num, String name, int guk, int young, int math) {
+		this.num = num;
+		this.name = name;
+		this.guk = guk;
+		this.young = young;
+		this.math = math;
+
+		this.sum = guk + young + math;
+
+	}
+
+	public String getNum() {
+		return num;
+	}
+
+	public void setNum(String num) {
+		this.num = num;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getGuk() {
+		return guk;
+	}
+
+	public void setGuk(int guk) {
+		this.guk = guk;
+	}
+
+	public int getYoung() {
+		return young;
+	}
+
+	public void setYoung(int young) {
+		this.young = young;
+	}
+
+	public int getMath() {
+		return math;
+	}
+
+	public void setMath(int math) {
+		this.math = math;
+	}
+
+	public int getSum() {
+		return sum;
+	}
+
+	public void setSum(int sum) {
+		this.sum = sum;
+	}
+
+	public int getRank() {
+		return rank;
+	}
+
+	public void setRank(int rank) {
+		this.rank = rank;
+	}
+
+	@Override
+	public String toString() {
+		return "Student [num=" + num + ", name=" + name + ", guk=" + guk + ", young=" + young + ", math=" + math
+				+ ", sum=" + sum + ", rank=" + rank + "]";
+	}
+
+	@Override
+	public int compareTo(Student stl) {
+		return this.getNum().compareTo(stl.getNum());
+	}
+}
+
+package work;
+
+import java.util.Comparator;
+
+public class SumDesc implements Comparator<Student> {
+	@Override
+	public int compare(Student stl1, Student stl2) {
+		if (stl1.getSum() > stl2.getSum()) {
+			return -1;
+		} else if (stl1.getSum() == stl2.getSum()) {
+			return new Integer(stl1.getNum().compareTo(stl2.getNum())) * -1;
+		} else {
+			return 1;
+		}
+	}
+
+}

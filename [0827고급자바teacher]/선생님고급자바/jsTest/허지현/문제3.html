@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //display, position, overflow, z-index, transform, css 선택자
+    /*
+    <display > 어떻게 표시할지
+
+    inline -> 줄 속에 넣는 요소  /  <b><span><a>등 특정 문자열을 선택할때 사용하는 태그
+           -> 줄바꿈 x
+    block  ->넓은 범위를 지정할 때 사용 
+           -> <p><h1><div><ul><ol>등 
+            ->block 요소는 화면 100%를 사용해 자동으로 앞뒤줄바꿈
+
+    display : inline
+    : 기본값으로 inline요소처럼 표시 (앞 뒤로 줄바꿈 x, 문자열이 붙어서 나옴)
+    display : block 
+    :요소를 block요소 처럼 (요소 앞뒤로 줄바꿈)
+    display : none
+    :박스가 생성되지 x, 공간차지 x (텍스트만 출력)
+    display : inline-block
+    :요소는 inline이지만 내부는 block처럼 (박스가 inline처럼 옆으로 늘어지게 나옴)
+
+    <position>
+    :HTML 문서상에서 요소가 배치되는 방식을 결정
+    :static,top,left,bottopn,right 속성과 함께 사용
+ 1. position : static; : 초기값 - position을 지정하지 않을경우 설정됨
+2. position : relative; : 나를 포함하고 있는 상위 부모 기준으로 위치 지정 실시 - float 지정 필요
+3. position : absolute; : 나를 포함하고 있는 가장까운 relative 속성을 가진 부모 기준으로 위치 지정 실시 - float 지정하지 않아도 무방함
+4. position : fixed; : 브라우저 화면 기준으로 위치 지정 실시 - 부모 연관 없음 / float 지정하지 않아도 무방함
+
+<overflow>
+ : overflow 프로퍼티는 요소내의 컨텐츠가 너무 커서 요소내에 모두 보여주기 힘들때 그것을 어떻게 보여줄지를 지정
+- visible : 기본 값입니다. 넘칠 경우 컨텐츠가 상자 밖으로 보여집니다.
+- hidden : 넘치는 부분은 잘려서 보여지지 않습니다.
+- scroll : 스크롤바가 추가되어 스크롤할 수 있습니다.(가로, 세로 모두 추가 됩니다.)
+- auto : 컨텐츠 량에 따라 스크롤바를 추가할지 자동으로 결정됩니다.( 필요에 따라 가로, 세로 별도로 추가될 수도 있습니다.)
+
+    
+<z-index>
+ :  z-index 값을 지정하기 위해서는 해당 요소의 
+    position 속성이 relative, absolute, fixed 중 하나여야만 한다.
+: 요소들의 수직 위치를 z-index 속성으로 정합니다. 
+  값은 정수이며, 숫자가 클 수록 위로 올라오고, 숫자가 작을 수록 아래로 내려갑니다.
+
+  <transform>
+    웹 요소의 위치를 이동시키거나 , 크기 조절 , 회전시킬수 있다
+    
+    transform:scaleX() / transform:scaleY() , transform:scale(x축비율, y축비율)
+    : 지정한 크기만큼 확때 또는 축소
+
+    transform:rotate() 
+    :지정한 각도만큼 회전
+    : 각도가 +값이면=>시계방향   -값이면 => 반시계 방향으로 회전
+    transform:rotateX()/  transform:rotateY() , transform:rotate(Ndeg)
+   
+
+    transform : translate()
+    : 지정요소 x또는 Y축으로 이동
+    trnsform:translateX(10px) /   trnsform:translateY(10px) /   trnsform:translate(10px,10px)
+
+    transform-origin
+    :지정 요소의 기준점을 변경
+
+   
+    <css 선택자 >
+     * , tag, #id명, .class명, 
+    자손 , 스페이스 자손포함후손, ,는 여러개선택
+    */
+    </script>
+</body>
+</html>

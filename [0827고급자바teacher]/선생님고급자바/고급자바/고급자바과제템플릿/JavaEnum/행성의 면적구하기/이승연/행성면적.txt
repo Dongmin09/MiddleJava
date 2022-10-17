@@ -1,0 +1,29 @@
+package practice;
+
+import kr.or.ddit.basic.T02EnumTest.Season;
+
+public class EnumPlanet {
+	public enum Planet {
+		荐己(2439), 陛己(6052), 瘤备(6371), 拳己(3390), 格己(69911), 配己(58232), 玫空己(25362), 秦空己(24622);
+
+		private long radius;
+
+		Planet(long data) {
+			radius = data;
+		}
+
+		public long getRadius() {
+			return radius;
+		}
+	}
+
+	public static void main(String[] args) {
+		System.out.println("青己搁利");
+		Planet[] planet = Planet.values();
+		for (int i = 0; i < planet.length; i++) {
+			long area = (long)(4 * Math.PI * (planet[i].getRadius() * planet[i].getRadius()));
+			System.out.println(planet[i].name() + " : " + area + "km"); 
+		}
+	}
+
+}

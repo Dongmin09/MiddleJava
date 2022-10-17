@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+    v_rans = [];
+    for (var i = 0; i < 20; i++) {
+    v_rans[i] = (Math.ceil(Math.random() * 20));
+    }
+ 
+    for (i = 0; i < v_rans.length; i++) {
+    console.log(v_rans[i]);
+    }
+
+    var minValue = 21;  // 랜덤으로 나오는 최대값보다 큰 값을 초기값으로 
+   
+    for (i = 0; i < v_rans.length; i++) {
+            if (minValue > v_rans[i]) {
+                minValue = v_rans[i];
+            }
+        }
+    console.log(minValue);
+
+    f_merong = function(p_ran) {
+        // for (var i = 0; i < 20; i++) {
+        //     p_rans[i] = (Math.ceil(Math.random() * 20));
+        // }  // 위에서 랜덤으로 배열에 들어가 있으니까 생략
+            for (j = 0; j < p_rans.length; j++) {
+                if (minValue > p_rans[j]) {
+                    minValue = p_rans[j];
+                }
+            }
+            return minValue;
+    }
+    console.log(minValue);
+</script>

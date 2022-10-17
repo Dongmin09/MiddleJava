@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>문제1번</title>
+</head>
+
+<body>
+    <script>
+        var rozeUp = 3;
+        var rozeDown = -2;
+        function rozeUpTime(p_time) {
+            var rozeUpLength = 0;
+            for (var i = 0; i < p_time; i++) {
+                if (i % 2 == 0) {
+                    rozeUpLength = rozeUpLength + rozeUp;
+                } else {
+                    rozeUpLength = rozeUpLength + rozeDown;
+                }
+            }
+            return rozeUpLength;
+        }
+        function rozeMoveTime(p_length) {
+            //1cm 움직이는데 2초가 걸림
+            var rozeMove = (rozeUp + rozeDown) * 2;
+            var rozeMoveTimeOut = (p_length / rozeMove);
+            return rozeMoveTimeOut;
+        }
+        console.log(rozeUpTime(5) + "cm");
+        console.log(rozeMoveTime(30) + "초");
+    </script>
+</body>
+
+</html>

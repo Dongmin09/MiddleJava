@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var a = [];
+        for (var i = 1; i <= 20; i++) {
+            a.push(Math.floor(Math.random() * 20 + 1));
+        }
+        function getMinValue(b) {
+            for (var i = 0; i < b.length; i++) {
+                for (var j = 1 + i; j < b.length; j++) {
+                    if (b[i] > b[j]) {
+                        value = b[i];
+                        b[i] = b[j];
+                        b[j] = value;
+                    }
+                }
+            }
+            console.log(a);
+            console.log(a[0]);
+        }
+        getMinValue(a);
+
+
+    </script>
+</body>
+</html>

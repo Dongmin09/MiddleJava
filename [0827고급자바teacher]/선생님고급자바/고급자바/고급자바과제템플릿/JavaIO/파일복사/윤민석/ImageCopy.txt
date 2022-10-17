@@ -1,0 +1,17 @@
+package homework;
+
+import java.io.*;
+
+public class ImageCopy {
+	public static void main(String[] args) throws Exception {
+		File jpg = new File("d:/D_Other/Tulips.jpg");
+		byte[] bytes = new byte[(int) jpg.length()];
+		DataInputStream dis = new DataInputStream(new FileInputStream(jpg));
+		dis.readFully(bytes);
+		dis.close();
+		
+		FileOutputStream fos = new FileOutputStream("d:/D_Other/복사본_Tulips.jpg");
+		fos.write(bytes);
+		fos.close();
+	}
+}

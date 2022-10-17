@@ -1,0 +1,108 @@
+package homework;
+
+import java.util.Random;
+
+public class Horse extends Thread implements Comparable<Horse> {
+	public static int currentRank;
+	private String hName;
+	private int rank;
+	private int position;
+	private Random random = new Random();
+	
+	public Horse(String hName) {
+		super();
+		this.hName = hName;
+	}
+
+	
+	
+	@Override
+	public String toString() {
+		return "Horse [hName=" + hName + ", rank=" + rank + "]";
+	}
+
+
+
+	public static int getCurrentRank() {
+		return currentRank;
+	}
+
+
+
+	public static void setCurrentRank(int currentRank) {
+		Horse.currentRank = currentRank;
+	}
+
+
+
+	public String gethName() {
+		return hName;
+	}
+
+
+
+	public void sethName(String hName) {
+		this.hName = hName;
+	}
+
+
+
+	public int getRank() {
+		return rank;
+	}
+
+
+
+	public void setRank(int rank) {
+		this.rank = rank;
+	}
+
+
+
+	public int getPosition() {
+		return position;
+	}
+
+
+
+	public void setPosition(int position) {
+		this.position = position;
+	}
+
+
+
+	public Random getRandom() {
+		return random;
+	}
+
+
+
+	public void setRandom(Random random) {
+		this.random = random;
+	}
+
+	@Override
+	public void run() {
+		for (int i = 1; i <= 50; i++) {
+			setPosition(i);
+
+			// 말이 달리는 속도 조절(랜덤)
+			try {
+				Thread.sleep(random.nextInt(200) + 10);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		setRank(++currentRank);
+	}
+
+
+	@Override
+	public int compareTo(Horse h) {
+		return Integer.compare(this.getRank(), h.getRank());
+	}
+	 
+}
+class Position extends Thread{
+	
+}

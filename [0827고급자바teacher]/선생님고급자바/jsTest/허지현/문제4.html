@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    #id_curtain {
+        position:relative;
+        width:400px;
+        border:10px groove rgb(221, 89, 192);
+    }
+    .content{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        font-size: 2em;
+        text-align: center;
+        color: yellow;
+        background-color: black;
+    }
+</style>
+</head>
+<body>
+    <div id="id_curtain">
+    </div> 
+<script>
+    var v_curtain = document.querySelector("#id_curtain");
+    var v_ex = 10;
+    function f_show(){
+        //태그 내에 height속성이 정의가 안 되어 있다면 강제 초기값
+        //function 밖에 있으면 더 좋음(상황에 의존)
+        if(!v_curtain.style.height){
+            v_curtain.style.height = "5px"; 
+        }
+        v_curtain.style.height = parseInt(v_curtain.style.height) + v_ex + "px";
+        // 재귀호출로 인해 무한 루핑이니, 종료 조건 필요(여기선 특정 height값!)
+        if(parseInt(v_curtain.style.height) >= innerHeight-50){
+            end();
+            return;
+        }
+        setTimeout(f_show,50);
+    }
+    
+    // window.onload = f_show;
+    function end() {
+        
+        var v_str="<div class=content><h3>공지사항</h3>"
+
+            v_str +="<hr color=white>";
+            v_str +="<h4>최고의 프로그래머라면</h4>";
+            v_str +="<h4>에러메세지에 웃음이 난다</h4>";
+            v_str +="<h4>시행착오가 즐겁다</h4>";
+            v_str +="<h4>로그 출력은 습관이다</h4><br>";
+            v_str +="<h4>컴터 NULL 사랑해</h4><br></div>";
+            v_curtain.innerHTML=v_str;
+    }
+    f_show();
+</script>   
+</body>
+</html>
